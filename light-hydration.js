@@ -118,31 +118,7 @@
     t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
   });
 
-  /* ---------- honest launch countdown (single bottle) ---------- */
-  var HOLD_SECONDS = 15 * 60;
-  var STORE_KEY = "cn_reflux_hold";
-  var start = parseInt(localStorage.getItem(STORE_KEY), 10);
-  if (!start || isNaN(start)) { start = Date.now(); localStorage.setItem(STORE_KEY, String(start)); }
-  var aTime = document.getElementById("a-time");
-  var oTime = document.getElementById("o-time");
-  var announceLine = document.querySelector(".announce p");
-  var countline = document.getElementById("countline");
-  function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
-  var int = setInterval(tick, 1000);
-  function tick() {
-    var remain = HOLD_SECONDS - Math.floor((Date.now() - start) / 1000);
-    if (remain > 0) {
-      var t = fmt(remain);
-      if (aTime) aTime.textContent = t;
-      if (oTime) oTime.textContent = t;
-    } else {
-      // Honest expiry: the price stays, the clock just stops.
-      if (announceLine) announceLine.textContent = "We still held your launch offer for you.";
-      if (countline) countline.textContent = "We still held your launch offer for you.";
-      clearInterval(int);
-    }
-  }
-  tick();
+  /* ---------- launch price is static: no per-visit countdown timer (FTC-honest) ---------- */
 
   /* ---------- video posters: fall back to the still if a clip cannot play ---------- */
   ["cell-vid", "hero-vid", "vid-inside", "vid-offer"].forEach(function (id) {

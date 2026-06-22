@@ -30,7 +30,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; font-family: var(--font); color: var(--ink);
   background: #ffffff;
-  line-height: 1.6; font-size: 18px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  line-height: 1.6; font-size: 19px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; display: block; }
 h1, h2, h3, h4 { color: var(--ink-strong); margin: 0; font-weight: 800; letter-spacing: -0.03em; line-height: 1.07; }
@@ -47,15 +47,15 @@ strong { color: var(--ink-strong); font-weight: 700; }
 .section.tight { padding: clamp(46px, 5vw, 74px) 0; }
 .section-head { max-width: 800px; margin: 0 auto clamp(36px, 4.2vw, 56px); text-align: center; }
 .eyebrow { display: none; }
-h2 { font-size: clamp(29px, 4.1vw, 50px); }
+h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .section-head .sub { margin-top: 18px; font-size: clamp(17px, 1.5vw, 20px); color: var(--ink); }
 .section-head .intro { margin-top: 18px; color: var(--ink); font-size: 18.5px; line-height: 1.55; }
 
 /* ---- buttons ---- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  background: var(--orange); color: #fff; font-weight: 700; font-size: 16.5px; letter-spacing: 0.01em;
-  padding: 18px 38px; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--orange); color: #fff; font-weight: 700; font-size: 17px; letter-spacing: 0.01em;
+  padding: 18px 38px; min-height: 56px; border-radius: 999px; border: 0; cursor: pointer;
   transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
   box-shadow: 0 12px 30px rgba(245, 130, 32, 0.28);
 }
@@ -159,6 +159,13 @@ h2 { font-size: clamp(29px, 4.1vw, 50px); }
 .tcol h3 { font-size: clamp(24px, 2.6vw, 32px); margin: 12px 0 16px; letter-spacing: -0.02em; }
 .tcol .body { font-size: 18px; color: var(--ink); line-height: 1.55; }
 .tcol .t-visual { margin: 0; }
+.tcol .t-spec { margin-top: 14px; font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: 0.01em; }
+
+/* inline CTA strips (repeated through the page, with guarantee) */
+.cta-strip { background: var(--white); padding: clamp(30px, 4vw, 46px) 0; }
+.cta-strip .wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.cta-strip .cta-btn { font-size: 18px; padding: 20px 48px; }
+.cta-strip .cta-guar { font-size: 15px; font-weight: 700; color: var(--ink-strong); }
 
 /* horizontal bar charts (pH + ORP) — simple, legible */
 .vchart-title, .dchart-title { text-align: center; font-size: 14px; font-weight: 800; color: var(--ink-strong); letter-spacing: -0.01em; }
@@ -168,7 +175,7 @@ h2 { font-size: clamp(29px, 4.1vw, 50px); }
 .vbar .vcol { width: 100%; border-radius: 8px 8px 0 0; }
 .vbar.ord .vcol { background: #cfcfd4; }
 .vbar.cell .vcol { background: var(--orange); }
-.vbar .vval { font-weight: 800; font-size: 21px; color: var(--ink-strong); margin-bottom: 8px; }
+.vbar .vval { font-weight: 800; font-size: 15px; color: var(--ink-strong); margin-bottom: 8px; }
 .vbar.cell .vval { color: var(--orange-deep); }
 .vbar .vlab { position: absolute; bottom: -28px; font-size: 13px; font-weight: 700; color: var(--ink-strong); white-space: nowrap; }
 .vbar.cell .vlab { color: var(--orange-deep); }
@@ -183,7 +190,7 @@ h2 { font-size: clamp(29px, 4.1vw, 50px); }
 .dbar .dcol { position: absolute; left: 0; right: 0; }
 .dbar.ord .dcol { bottom: 58%; height: 24%; background: #cfcfd4; border-radius: 8px 8px 0 0; }
 .dbar.cell .dcol { top: 42%; height: 34%; background: var(--orange); border-radius: 0 0 8px 8px; }
-.dbar .dval { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; font-size: 18px; }
+.dbar .dval { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; font-size: 15px; }
 .dbar.ord .dval { bottom: calc(58% + 24% + 6px); color: var(--ink-strong); }
 .dbar.cell .dval { top: calc(42% + 34% + 6px); color: var(--orange-deep); }
 .dbar .dlab { position: absolute; left: 0; right: 0; text-align: center; bottom: -28px; font-size: 13px; font-weight: 700; color: var(--ink-strong); white-space: nowrap; }
@@ -206,7 +213,7 @@ h2 { font-size: clamp(29px, 4.1vw, 50px); }
 .compare-proof { max-width: 900px; margin: 22px auto 0; text-align: center; font-size: 16.5px; color: var(--ink); }
 .compare-proof strong { color: var(--ink-strong); }
 .ctable { width: 100%; border-collapse: separate; border-spacing: 0; }
-.ctable th, .ctable td { padding: 15px 16px; text-align: center; font-size: 15px; }
+.ctable th, .ctable td { padding: 15px 16px; text-align: center; font-size: 16px; }
 .ctable thead th { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding-bottom: 18px; }
 .ctable tbody td:first-child, .ctable thead th:first-child { text-align: left; font-weight: 600; color: var(--ink-strong); }
 .ctable tbody tr td { border-top: 1px solid var(--line-soft); }
@@ -225,7 +232,7 @@ h2 { font-size: clamp(29px, 4.1vw, 50px); }
 .reviews-list { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-content: start; }
 .tcard { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
 .stars { color: var(--orange); letter-spacing: 2px; font-size: 15px; }
-.tcard .quote { margin: 13px 0 20px; font-size: 15px; color: var(--ink); line-height: 1.65; }
+.tcard .quote { margin: 13px 0 20px; font-size: 16.5px; color: var(--ink); line-height: 1.65; }
 .tcard .who { display: flex; align-items: center; gap: 12px; margin-top: auto; }
 .mono { width: 42px; height: 42px; border-radius: 50%; background: var(--peach); color: var(--orange); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 14px; flex: 0 0 auto; }
 .tcard .name { font-weight: 700; font-size: 14.5px; color: var(--ink-strong); }
@@ -312,9 +319,11 @@ h2 { font-size: clamp(29px, 4.1vw, 50px); }
 @media (max-width: 600px) {
   .steps { grid-template-columns: 1fr; }
   .reviews-list { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .hero-cta { align-items: stretch; }
 }
 @media (max-width: 520px) {
-  body { font-size: 16px; }
+  body { font-size: 19px; }
   .order .now { font-size: 40px; }
-  .announce p { font-size: 12px; }
+  .announce p { font-size: 12.5px; }
 }
