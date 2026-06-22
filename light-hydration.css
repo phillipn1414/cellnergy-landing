@@ -50,6 +50,7 @@ strong { color: var(--ink-strong); font-weight: 700; }
 h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .section-head .sub { margin-top: 18px; font-size: clamp(17px, 1.5vw, 20px); color: var(--ink); }
 .section-head .intro { margin-top: 18px; color: var(--ink); font-size: 18.5px; line-height: 1.55; }
+.section-head .hub-cue { margin-top: 14px; color: var(--muted); font-size: 15.5px; line-height: 1.5; }
 
 /* ---- buttons ---- */
 .btn {

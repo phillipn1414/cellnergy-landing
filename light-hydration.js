@@ -118,7 +118,20 @@
     t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
   });
 
-  /* ---------- launch price is static: no per-visit countdown timer (FTC-honest) ---------- */
+  /* ---------- launch countdown: 15-minute timer that resets when it hits zero ---------- */
+  var CYCLE = 15 * 60;
+  var remain = CYCLE;
+  var aTime = document.getElementById("a-time");
+  var oTime = document.getElementById("o-time");
+  function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+  function tickDown() {
+    var t = fmt(remain);
+    if (aTime) aTime.textContent = t;
+    if (oTime) oTime.textContent = t;
+    remain--;
+    if (remain < 0) remain = CYCLE; // reset every 15 minutes
+  }
+  if (aTime || oTime) { tickDown(); setInterval(tickDown, 1000); }
 
   /* ---------- video posters: fall back to the still if a clip cannot play ---------- */
   ["cell-vid", "hero-vid", "vid-inside", "vid-offer"].forEach(function (id) {
