@@ -170,6 +170,26 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .cta-strip .cta-btn { font-size: 18px; padding: 20px 48px; }
 .cta-strip .cta-guar { display: inline-flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 800; color: var(--ink-strong); }
 
+/* ===== easy-switch: relief beat before the offer (text+icons left, photo right) ===== */
+.easy { background: var(--beige); }
+.easy-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 5vw, 64px); align-items: center; max-width: 1080px; margin: 0 auto; }
+.easy-text h2 { font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 26px; }
+.easy-list { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 20px; }
+.easy-list li { display: flex; align-items: flex-start; gap: 16px; }
+.easy-ic { flex: 0 0 auto; width: 48px; height: 48px; border-radius: 50%; background: var(--peach); display: inline-flex; align-items: center; justify-content: center; }
+.easy-ic svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.easy-list p { font-size: 17.5px; color: var(--ink); line-height: 1.5; margin: 0; }
+.easy-list strong { color: var(--ink-strong); }
+.easy-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.easy-cta .btn { font-size: 18px; padding: 20px 44px; }
+.easy-cta .reassure { display: inline-flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 800; color: var(--ink-strong); }
+.easy-media { border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 3/2; }
+.easy-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 900px) {
+  .easy-grid { grid-template-columns: 1fr; gap: 28px; }
+  .easy-media { order: -1; max-width: 520px; margin: 0 auto; }
+}
+
 /* horizontal bar charts (pH + ORP) — simple, legible */
 .vchart-title, .dchart-title { text-align: center; font-size: 14px; font-weight: 800; color: var(--ink-strong); letter-spacing: -0.01em; }
 /* vertical pH chart with pepsin threshold line */
