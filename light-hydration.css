@@ -47,6 +47,7 @@ strong { color: var(--ink-strong); font-weight: 700; }
 .section.tight { padding: clamp(46px, 5vw, 74px) 0; }
 .section-head { max-width: 800px; margin: 0 auto clamp(36px, 4.2vw, 56px); text-align: center; }
 .eyebrow { display: none; }
+.step-badge { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 auto 18px; border-radius: 50%; background: var(--orange); color: #fff; font-weight: 900; font-size: 20px; line-height: 1; box-shadow: 0 10px 24px rgba(245,130,32,0.30); }
 h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .section-head .sub { margin-top: 18px; font-size: clamp(17px, 1.5vw, 20px); color: var(--ink); }
 .section-head .intro { margin-top: 18px; color: var(--ink); font-size: 18.5px; line-height: 1.55; }
