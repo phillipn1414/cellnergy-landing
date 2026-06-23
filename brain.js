@@ -36,9 +36,9 @@
 
   /* ---------- interactive brain ---------- */
   var NODES = [
-    { tag: "Problem 01", t: "Acidic and flat", d: "Most tap water is a little acidic and flat, the kind that sits forgotten on your desk while you stay under-hydrated." },
-    { tag: "Problem 02", t: "Flat, not fresh", d: "Everyday life creates oxidation, and ordinary water sits positive on the ORP scale, so it only adds to that, never fresh." },
-    { tag: "Problem 03", t: "Heavy, not light", d: "Plain water can feel heavy and flat, so it is easy to sip less than you mean to through the day." },
+    { tag: "Problem 01", t: "Most tap water is <strong>acidic and flat</strong>", d: "It is the glass that sits forgotten on your desk while the <strong>afternoon fog</strong> quietly creeps in." },
+    { tag: "Problem 02", t: "Ordinary water <strong>adds to oxidation</strong>", d: "Everyday life creates oxidation, and ordinary water sits positive on the ORP scale, so it feels <strong>flat, not fresh</strong>." },
+    { tag: "Problem 03", t: "Plain water feels <strong>heavy and dull</strong>", d: "So it is easy to sip <strong>less than you mean to</strong>, and stay a step behind all day." },
   ];
   var bnodes = [].slice.call(document.querySelectorAll(".bnode"));
   var panel = document.getElementById("brain-panel");
@@ -54,8 +54,8 @@
     panel.classList.add("swap");
     setTimeout(function () {
       if (bpTag) bpTag.textContent = NODES[i].tag;
-      if (bpTitle) bpTitle.textContent = NODES[i].t;
-      if (bpDesc) bpDesc.textContent = NODES[i].d;
+      if (bpTitle) bpTitle.innerHTML = NODES[i].t;
+      if (bpDesc) bpDesc.innerHTML = NODES[i].d;
       panel.classList.remove("swap");
     }, 160);
   }
