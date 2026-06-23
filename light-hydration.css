@@ -161,6 +161,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .tcol .t-num { display: block; font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); font-weight: 800; margin-bottom: 6px; }
 .tcol h3 { font-size: clamp(24px, 2.6vw, 32px); margin: 12px 0 16px; letter-spacing: -0.02em; }
 .tcol .body { font-size: 18px; color: var(--ink); line-height: 1.55; }
+.tcol .t-text .body + .body { margin-top: 14px; }
 .tcol .t-visual { margin: 0; }
 .tcol .t-spec { margin-top: 14px; font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: 0.01em; }
 
@@ -192,7 +193,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 
 /* horizontal bar charts (pH + ORP) — simple, legible */
 .vchart-title, .dchart-title { text-align: center; font-size: 14px; font-weight: 800; color: var(--ink-strong); letter-spacing: -0.01em; }
-.dchart-sub { text-align: center; font-size: 13.5px; color: var(--ink); line-height: 1.5; max-width: 360px; margin: 8px auto 0; }
+.dchart-sub, .vchart-sub { text-align: center; font-size: 13.5px; color: var(--ink); line-height: 1.5; max-width: 360px; margin: 8px auto 0; }
 /* vertical pH chart with pepsin threshold line */
 .vchart-plot { position: relative; height: 210px; display: flex; align-items: flex-end; justify-content: center; gap: clamp(34px, 9vw, 72px); margin: 34px 0 38px; }
 .vbar { position: relative; width: 76px; max-width: 26vw; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
