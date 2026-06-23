@@ -1,8 +1,7 @@
 /* ============================================================
    CELLNERGY Hydration System — Brain Wellness page
-   Trust marquee, interactive brain nodes, quantity selector,
-   sticky add-to-cart, FAQ accordion, honest launch countdown,
-   Lenis smooth scroll, scroll reveals.
+   Trust marquee, interactive brain nodes, bundle tabs + refill add-on,
+   sticky add-to-cart, FAQ accordion, Lenis smooth scroll, scroll reveals.
    ============================================================ */
 (function () {
   "use strict";
@@ -22,7 +21,7 @@
     { chip: true, logoOnly: true, logo: "assets/icons/asa-logo.svg", label: "American Society on Aging" },
     { svg: "bpa", label: "BPA Free" },
     { logo: "assets/badges/truemed-logo-orange.svg", label: "FSA Eligible" },
-    { svg: "guarantee", label: "60-Day Money-Back Guarantee" },
+    { svg: "guarantee", label: "90-Day Money-Back Guarantee" },
   ];
   var track = document.getElementById("marquee-track");
   if (track) {
@@ -37,9 +36,9 @@
 
   /* ---------- interactive brain ---------- */
   var NODES = [
-    { tag: "Problem 01", t: "Acidic and empty", d: "Ordinary water is slightly acidic and stripped of minerals, so you sip all day and stay quietly under-hydrated." },
-    { tag: "Problem 02", t: "Adds to oxidation", d: "Screens, stress, and daily life create free radicals that act like rust, and your hard-working brain is especially exposed. Positive-ORP water only adds to the load." },
-    { tag: "Problem 03", t: "Barely absorbs", d: "Ordinary water moves in large clusters that mostly pass straight through, so much of what you drink never really reaches your cells." },
+    { tag: "Problem 01", t: "Acidic and flat", d: "Most tap water is a little acidic and flat, the kind that sits forgotten on your desk while you stay under-hydrated." },
+    { tag: "Problem 02", t: "Flat, not fresh", d: "Everyday life creates oxidation, and ordinary water sits positive on the ORP scale, so it only adds to that, never fresh." },
+    { tag: "Problem 03", t: "Heavy, not light", d: "Plain water can feel heavy and flat, so it is easy to sip less than you mean to through the day." },
   ];
   var bnodes = [].slice.call(document.querySelectorAll(".bnode"));
   var panel = document.getElementById("brain-panel");
@@ -99,30 +98,37 @@
     });
   });
 
-  /* ---------- honest launch countdown ---------- */
-  var HOLD_SECONDS = 15 * 60;
-  var STORE_KEY = "cn_brain_hold";
-  var start = parseInt(localStorage.getItem(STORE_KEY), 10);
-  if (!start || isNaN(start)) { start = Date.now(); localStorage.setItem(STORE_KEY, String(start)); }
-  var aTime = document.getElementById("a-time");
-  var oTime = document.getElementById("o-time");
-  var announceLine = document.querySelector(".announce p");
-  var countline = document.getElementById("countline");
-  function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
-  var int = setInterval(tick, 1000);
-  function tick() {
-    var remain = HOLD_SECONDS - Math.floor((Date.now() - start) / 1000);
-    if (remain > 0) {
-      var t = fmt(remain);
-      if (aTime) aTime.textContent = t;
-      if (oTime) oTime.textContent = t;
-    } else {
-      if (announceLine) announceLine.innerHTML = 'We still held your offer for you, yours for <span class="a-price">$29</span>';
-      if (countline) countline.textContent = "We still held your offer for you, just $29";
-      clearInterval(int);
+  /* ---------- bundle tabs (1 bottle / 3 bottles) + refill add-on ---------- */
+  var tabs = [].slice.call(document.querySelectorAll(".buy-tab"));
+  var oWas = document.getElementById("o-was");
+  var oNow = document.getElementById("o-now");
+  var oSave = document.getElementById("o-save");
+  var ringAmt = document.getElementById("ring-amt");
+  var orderCta = document.getElementById("order-cta");
+  var addonCheck = document.getElementById("addon-check");
+  var baseHref = orderCta ? orderCta.getAttribute("href") : "";
+
+  function applyAddon(href) {
+    // append a refill flag so the cart can add the 6-month refill 3-pack (real variant link TBD)
+    if (addonCheck && addonCheck.checked) { return href + (href.indexOf("?") > -1 ? "&" : "?") + "refill3=1"; }
+    return href;
+  }
+  function selectTab(tab) {
+    tabs.forEach(function (t) { t.classList.toggle("active", t === tab); });
+    if (oWas) oWas.textContent = tab.getAttribute("data-was");
+    if (oNow) oNow.textContent = tab.getAttribute("data-now");
+    if (oSave) oSave.textContent = tab.getAttribute("data-save");
+    if (ringAmt) ringAmt.textContent = tab.getAttribute("data-ring");
+    if (orderCta) {
+      orderCta.textContent = tab.getAttribute("data-cta");
+      baseHref = tab.getAttribute("data-href");
+      orderCta.setAttribute("href", applyAddon(baseHref));
     }
   }
-  tick();
+  tabs.forEach(function (t) { t.addEventListener("click", function () { selectTab(t); }); });
+  if (addonCheck && orderCta) {
+    addonCheck.addEventListener("change", function () { orderCta.setAttribute("href", applyAddon(baseHref)); });
+  }
 
   /* ---------- sticky add-to-cart: show after hero, hide over the offer ---------- */
   var sticky = document.getElementById("stickybar");

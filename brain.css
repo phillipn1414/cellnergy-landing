@@ -40,7 +40,7 @@ body {
     radial-gradient(72% 48% at 50% 0%, rgba(221, 238, 247, 0.7) 0%, rgba(221, 238, 247, 0) 60%),
     linear-gradient(180deg, #ffffff 0%, #f3f8fb 55%, #eef4f8 100%);
   background-attachment: fixed;
-  line-height: 1.72; font-size: 17px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  line-height: 1.72; font-size: 18px; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; display: block; }
 h1, h2, h3, h4 { color: var(--ink-strong); margin: 0; font-weight: 800; letter-spacing: -0.032em; line-height: 1.08; }
@@ -359,8 +359,36 @@ h2 { font-size: clamp(30px, 4.2vw, 52px); }
 .save-ring { position: absolute; top: 16px; right: 16px; width: 104px; height: 104px; border-radius: 50%; background: var(--orange); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; line-height: 1; box-shadow: 0 16px 34px rgba(245,130,32,.5); border: 4px solid #fff; transform: rotate(-7deg); animation: badgepop 3.4s ease-in-out infinite; z-index: 2; }
 .save-ring .s-num { font-size: 34px; font-weight: 900; letter-spacing: -0.03em; }
 .save-ring .s-off { font-size: 13px; font-weight: 800; letter-spacing: 0.16em; margin-top: 3px; }
+.save-ring .s-small { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.save-ring .s-big { font-size: 30px; font-weight: 900; letter-spacing: -0.02em; margin-top: 2px; }
 @keyframes badgepop { 0%,100% { transform: rotate(-7deg) scale(1); } 50% { transform: rotate(-7deg) scale(1.06); } }
 @media (prefers-reduced-motion: reduce) { .save-ring { animation: none; } }
+/* bundle tabs */
+.buy-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 4px 0 18px; }
+.buy-tab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--ice); border: 2px solid var(--line); border-radius: var(--r); padding: 16px 10px 14px; cursor: pointer; font-family: inherit; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.buy-tab:hover { transform: translateY(-2px); }
+.buy-tab .bt-name { font-size: 15px; font-weight: 700; color: var(--ink-strong); }
+.buy-tab .bt-price { font-size: 22px; font-weight: 900; color: var(--ink-strong); letter-spacing: -0.02em; }
+.buy-tab .bt-best { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.buy-tab.active { border-color: var(--orange); background: #fff7ef; }
+.buy-tab.active .bt-price { color: var(--orange-deep); }
+/* refill add-on + subscribe */
+.addon { display: flex; align-items: flex-start; gap: 12px; margin-top: 16px; background: var(--ice); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; cursor: pointer; }
+.addon input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--orange); flex: 0 0 auto; }
+.addon-txt { font-size: 14.5px; color: var(--ink); line-height: 1.5; }
+.addon-txt strong { color: var(--ink-strong); }
+.subsave { margin-top: 10px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.subsave strong { color: var(--orange-deep); }
+/* what you get */
+.whatyouget { margin-top: 20px; }
+.wyg-title { font-size: 12.5px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel-deep); margin-bottom: 8px; }
+.cta-reassure { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; color: var(--ink-strong); font-weight: 600; }
+.cta-reassure svg { width: 17px; height: 17px; stroke: var(--orange); fill: none; stroke-width: 1.9; }
+/* feeling-card spec line */
+.tbox-copy .spec { font-size: 14.5px; color: var(--muted); margin-top: 10px; }
+.tbox-copy .spec strong { color: var(--ink-strong); }
+/* beat CTA */
+.beat-cta { margin-top: 26px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 /* offer info */
 .close-info .eyebrow { margin-bottom: 12px; }
 .close-info h2 { font-size: clamp(27px, 3vw, 42px); }
@@ -457,6 +485,7 @@ h2 { font-size: clamp(30px, 4.2vw, 52px); }
 .sb-price { font-size: 14px; }
 .sb-was { color: var(--muted); text-decoration: line-through; }
 .sb-now { color: var(--orange); font-weight: 900; font-size: 19px; }
+.sb-guar { color: var(--ink); font-weight: 600; }
 .stickybar .btn { padding: 14px 30px; font-size: 15.5px; }
 
 /* ============================================================ RESPONSIVE */
@@ -483,6 +512,9 @@ h2 { font-size: clamp(30px, 4.2vw, 52px); }
   .hero { min-height: 0; padding: 84px 0 64px; }
   .hero::after { background: linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.86) 55%, rgba(255,255,255,.55) 100%); }
   .ctaband-inner { flex-direction: column; align-items: flex-start; }
+  /* older-mobile readability: full-width tall buttons */
+  .hero-cta .btn, .beat-cta .btn { width: 100%; }
+  .btn { min-height: 56px; padding: 18px 32px; }
 }
 @media (max-width: 600px) {
   .wrap { padding: 0 22px; }
@@ -492,8 +524,9 @@ h2 { font-size: clamp(30px, 4.2vw, 52px); }
   .stickybar .sb-name { display: none; }
 }
 @media (max-width: 520px) {
-  body { font-size: 16px; }
-  .order .now { font-size: 40px; }
-  .announce p { font-size: 12px; }
-  .ctable th, .ctable td { padding: 11px 7px; font-size: 13.5px; }
+  body { font-size: 18px; }
+  .close-price .now { font-size: 44px; }
+  .announce p { font-size: 12.5px; }
+  .ctable th, .ctable td { padding: 11px 6px; font-size: 13.5px; }
+  .buy-tabs { grid-template-columns: 1fr; }
 }
