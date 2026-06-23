@@ -15,7 +15,7 @@
   <meta name="twitter:title" content="Water that feels light and easy to drink | CELLNERGY" />
   <meta name="twitter:description" content="Alkaline, hydrogen-rich water in one simple bottle. Smooth, light, easy on your stomach." />
   <meta name="twitter:image" content="https://phillipn1414.github.io/cellnergy-landing/assets/hero-reflux.jpg" />
-  <link rel="stylesheet" href="light-hydration.css?v=3" />
+  <link rel="stylesheet" href="light-hydration.css?v=4" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -299,13 +299,25 @@
       <div class="offer-grid">
         <div class="offer-visual reveal">
           <video id="vid-offer" src="assets/offer-reflux.mp4" poster="assets/offer-reflux.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The CELLNERGY Hydration System"></video>
-          <div class="save-badge"><span class="s-small">Save</span><span class="s-big" id="save-pct">20%</span><span class="s-small">Off</span></div>
+          <div class="save-badge"><span class="s-small">Save</span><span class="s-big" id="save-amt">$10</span></div>
         </div>
         <div class="order reveal d1">
+          <p class="order-sub">One bottle. <strong>Three technologies.</strong> Water you will <strong>actually drink all day.*</strong></p>
+          <div class="buy-tabs" role="tablist" aria-label="Choose your pack">
+            <button class="buy-tab active" type="button" data-plan="single" aria-selected="true">
+              <span class="bt-name">1 Bottle</span>
+              <span class="bt-price">$39</span>
+            </button>
+            <button class="buy-tab" type="button" data-plan="triple" aria-selected="false">
+              <span class="bt-tag">Best value</span>
+              <span class="bt-name">3 Bottles</span>
+              <span class="bt-price">$99</span>
+            </button>
+          </div>
           <div class="pricing">
-            <span class="was">$49</span>
-            <span class="now">$39</span>
-            <span class="save-pill">You save $10</span>
+            <span class="was" id="p-was">$49</span>
+            <span class="now" id="p-now">$39</span>
+            <span class="save-pill" id="p-save">You save $10</span>
           </div>
           <a class="btn block" id="order-cta" href="https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect" target="_blank" rel="noopener">Get mine for $39</a>
           <div class="guar-line"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>90-Day Money-Back Guarantee</strong></div>
@@ -316,13 +328,14 @@
           <p class="subsave">Prefer set-and-forget? Choose <strong>Subscribe &amp; Save</strong> at checkout and we auto-ship refills every 2 months at 15% off. Cancel anytime.</p>
           <div class="wyg">
             <h3 class="wyg-head">What you get</h3>
-            <ul class="includes">
+            <ul class="includes" id="p-includes">
               <li>1 CELLNERGY Hydration System (650 mL / 22 oz)</li>
-              <li>Mineral diffuser with all 6 elements installed</li>
-              <li>90-Day money-back guarantee</li>
+              <li>6-element mineral diffuser installed inside</li>
+              <li>90-day money-back guarantee</li>
               <li>HSA / FSA accepted</li>
             </ul>
           </div>
+          <div class="pay-note"><img class="tm" src="assets/badges/truemed-orange.svg" alt="Truemed, pay with HSA or FSA" /> Pay with HSA / FSA via Truemed</div>
         </div>
       </div>
     </div>
@@ -375,6 +388,6 @@
   </footer>
 
   <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
-  <script src="light-hydration.js?v=3"></script>
+  <script src="light-hydration.js?v=4"></script>
 </body>
 </html>

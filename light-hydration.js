@@ -68,6 +68,54 @@
     });
   });
 
+  /* ---------- buy tabs: 1 bottle vs 3 bottles (drives price, button, save badge, what-you-get) ---------- */
+  var SHOP = "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect";
+  var PLANS = {
+    single: {
+      was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: SHOP,
+      includes: [
+        "1 CELLNERGY Hydration System (650 mL / 22 oz)",
+        "6-element mineral diffuser installed inside",
+        "90-day money-back guarantee",
+        "HSA / FSA accepted",
+      ],
+    },
+    triple: {
+      was: "$147", now: "$99", save: "You save $48", badge: "$48", cta: "Get my 3-pack for $99", href: SHOP + "&quantity=3",
+      includes: [
+        "3 CELLNERGY Hydration Systems (650 mL / 22 oz)",
+        "3 mineral diffusers installed inside",
+        "90-day money-back guarantee",
+        "HSA / FSA accepted",
+      ],
+    },
+  };
+  var elWas = document.getElementById("p-was"),
+      elNow = document.getElementById("p-now"),
+      elSave = document.getElementById("p-save"),
+      elCta = document.getElementById("order-cta"),
+      elInc = document.getElementById("p-includes"),
+      elAmt = document.getElementById("save-amt"),
+      buyTabs = [].slice.call(document.querySelectorAll(".buy-tab"));
+  function applyPlan(key) {
+    var p = PLANS[key];
+    if (!p) return;
+    if (elWas) elWas.textContent = p.was;
+    if (elNow) elNow.textContent = p.now;
+    if (elSave) elSave.textContent = p.save;
+    if (elAmt) elAmt.textContent = p.badge;
+    if (elInc) elInc.innerHTML = p.includes.map(function (i) { return "<li>" + i + "</li>"; }).join("");
+    if (elCta) { elCta.textContent = p.cta; elCta.setAttribute("href", p.href); }
+    buyTabs.forEach(function (t) {
+      var on = t.getAttribute("data-plan") === key;
+      t.classList.toggle("active", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+    });
+  }
+  buyTabs.forEach(function (t) {
+    t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
+  });
+
   /* ---------- launch countdown: 15-minute timer that resets when it hits zero ---------- */
   var CYCLE = 15 * 60;
   var remain = CYCLE;

@@ -281,6 +281,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 
 /* offer card — reference design: save pill, credible guarantee, refill bump, subscribe note, what-you-get */
 .order .pricing .now { font-size: 56px; color: var(--orange); }
+.order-sub { font-size: 16px; color: var(--ink); margin-bottom: 18px; line-height: 1.5; }
 .save-pill { background: var(--orange-soft); color: var(--orange-deep); font-weight: 800; font-size: 14px; padding: 8px 16px; border-radius: 999px; white-space: nowrap; }
 .order .btn.block { margin-top: 20px; font-size: 19px; padding: 22px; }
 .order .guar-line { display: flex; align-items: center; gap: 9px; margin-top: 16px; font-size: 16px; font-weight: 800; color: var(--ink-strong); }
