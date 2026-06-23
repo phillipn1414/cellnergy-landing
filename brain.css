@@ -288,7 +288,7 @@ h2 { font-size: clamp(30px, 4.2vw, 52px); }
 .ph-bar.cellnergy .val { color: var(--orange-deep); }
 .ph-bar .cap { font-size: 12.5px; color: var(--muted); margin-top: 12px; text-align: center; }
 .ph-threshold { position: absolute; left: 0; right: 0; bottom: 60%; border-top: 2px dashed var(--orange); opacity: .85; }
-.ph-threshold span { position: absolute; left: 0; top: -10px; font-size: 11.5px; color: var(--orange-deep); font-weight: 700; background: var(--ice); padding: 0 7px; }
+.ph-threshold span { position: absolute; left: 50%; transform: translateX(-50%); top: -10px; font-size: 11.5px; color: var(--orange-deep); font-weight: 700; background: var(--ice); padding: 0 7px; white-space: nowrap; }
 
 /* diverging ORP chart */
 .orp { position: relative; height: 210px; }
@@ -344,7 +344,8 @@ h2 { font-size: clamp(30px, 4.2vw, 52px); }
 .hl-col .mark-yes { color: #fff; }
 .mark-no { color: #c2cdd5; font-weight: 700; font-size: 17px; }
 .mark-na { color: var(--muted); font-weight: 700; }
-.compare-note { text-align: center; max-width: 660px; margin: 24px auto 0; font-size: 16px; color: var(--ink); line-height: 1.6; }
+.compare-note { text-align: center; max-width: 600px; margin: 24px auto 0; font-size: 16px; color: var(--ink); line-height: 1.6; text-wrap: balance; }
+.cta-reassure { display: block; margin-top: 12px; font-size: 14px; color: var(--ink); font-weight: 600; }
 
 /* ============================================================ CLOSING OFFER (single bottle, horizontal) */
 .close { position: relative; z-index: 2; padding: clamp(58px, 6.5vw, 100px) 0; }

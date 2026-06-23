@@ -68,56 +68,6 @@
     });
   });
 
-  /* ---------- buy tabs: 1 bottle vs 3 bottles (bottom offer only) ---------- */
-  var SHOP = "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect";
-  var PLANS = {
-    single: {
-      was: "$49", now: "$39", badge: "Launch price &middot; save $10", unit: "for 1 bottle", pct: "20%",
-      includes: [
-        "1 CELLNERGY Hydration System (650 mL / 22 oz)",
-        "Mineral diffuser with all 6 elements installed",
-        "90-Day hassle-free money-back guarantee",
-      ],
-      cta: "Get Mine For $39 &rarr;", href: SHOP,
-    },
-    triple: {
-      was: "$147", now: "$99", badge: "Best value &middot; save $48", unit: "for 3 bottles ($33 each)", pct: "33%",
-      includes: [
-        "3 CELLNERGY Hydration Systems (650 mL / 22 oz)",
-        "3 mineral diffusers with all 6 elements installed",
-        "90-Day hassle-free money-back guarantee",
-      ],
-      cta: "Get 3 For $99 &rarr;", href: SHOP + "&quantity=3",
-    },
-  };
-  var elWas = document.getElementById("p-was"),
-      elNow = document.getElementById("p-now"),
-      elBadge = document.getElementById("p-badge"),
-      elUnit = document.getElementById("p-unit"),
-      elInc = document.getElementById("p-includes"),
-      elCta = document.getElementById("order-cta"),
-      elPct = document.getElementById("save-pct"),
-      buyTabs = [].slice.call(document.querySelectorAll(".buy-tab"));
-  function applyPlan(key) {
-    var p = PLANS[key];
-    if (!p) return;
-    if (elWas) elWas.textContent = p.was;
-    if (elNow) elNow.textContent = p.now;
-    if (elBadge) elBadge.innerHTML = p.badge;
-    if (elUnit) elUnit.textContent = p.unit;
-    if (elPct) elPct.textContent = p.pct;
-    if (elInc) elInc.innerHTML = p.includes.map(function (i) { return "<li>" + i + "</li>"; }).join("");
-    if (elCta) { elCta.innerHTML = p.cta; elCta.setAttribute("href", p.href); }
-    buyTabs.forEach(function (t) {
-      var on = t.getAttribute("data-plan") === key;
-      t.classList.toggle("active", on);
-      t.setAttribute("aria-selected", on ? "true" : "false");
-    });
-  }
-  buyTabs.forEach(function (t) {
-    t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
-  });
-
   /* ---------- launch countdown: 15-minute timer that resets when it hits zero ---------- */
   var CYCLE = 15 * 60;
   var remain = CYCLE;

@@ -130,6 +130,21 @@
     addonCheck.addEventListener("change", function () { orderCta.setAttribute("href", applyAddon(baseHref)); });
   }
 
+  /* ---------- looping 15-minute launch timer (resets every 15 min) ---------- */
+  var HOLD = 15 * 60;
+  var t0 = Date.now();
+  var aTime = document.getElementById("a-time");
+  var oTime = document.getElementById("o-time");
+  function fmtT(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+  function tickTimer() {
+    var elapsed = Math.floor((Date.now() - t0) / 1000);
+    var remain = HOLD - (elapsed % HOLD);
+    var t = fmtT(remain);
+    if (aTime) aTime.textContent = t;
+    if (oTime) oTime.textContent = t;
+  }
+  if (aTime || oTime) { tickTimer(); setInterval(tickTimer, 1000); }
+
   /* ---------- sticky add-to-cart: show after hero, hide over the offer ---------- */
   var sticky = document.getElementById("stickybar");
   var hero = document.getElementById("top");
