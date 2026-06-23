@@ -205,7 +205,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .vbar .vlab { position: absolute; bottom: -28px; font-size: 13px; font-weight: 700; color: var(--ink-strong); white-space: nowrap; }
 .vbar.cell .vlab { color: var(--orange-deep); }
 .vthresh { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--orange-deep); z-index: 2; }
-.vthresh span { position: absolute; left: 0; top: -19px; font-size: 12px; font-weight: 700; color: var(--orange-deep); background: #fff; padding: 0 6px; }
+.vthresh span { position: absolute; left: 50%; transform: translateX(-50%); top: -10px; font-size: 12px; font-weight: 700; color: var(--orange-deep); background: #fff; padding: 0 8px; white-space: nowrap; }
 /* diverging ORP chart (0 baseline, positive up / negative down) */
 .dchart-plot { position: relative; height: 240px; margin: 34px 0 70px; }
 .dbaseline { position: absolute; left: 0; right: 0; top: 42%; border-top: 1.5px dashed #c4c4cc; }
