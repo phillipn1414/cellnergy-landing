@@ -84,7 +84,7 @@
       was: "$147", now: "$99", save: "You save $48", badge: "$48", cta: "Get my 3-pack for $99", href: SHOP + "&quantity=3",
       includes: [
         "3 CELLNERGY Hydration Systems (650 mL / 22 oz)",
-        "3 mineral diffusers installed inside",
+        "6-element mineral diffuser installed inside",
         "90-day money-back guarantee",
         "HSA / FSA accepted",
       ],
