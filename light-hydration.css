@@ -207,7 +207,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .vthresh { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--orange-deep); z-index: 2; }
 .vthresh span { position: absolute; left: 0; top: -19px; font-size: 12px; font-weight: 700; color: var(--orange-deep); background: #fff; padding: 0 6px; }
 /* diverging ORP chart (0 baseline, positive up / negative down) */
-.dchart-plot { position: relative; height: 240px; margin: 34px 0 38px; }
+.dchart-plot { position: relative; height: 240px; margin: 34px 0 70px; }
 .dbaseline { position: absolute; left: 0; right: 0; top: 42%; border-top: 1.5px dashed #c4c4cc; }
 .dbaseline span { position: absolute; left: 0; top: -10px; font-size: 12px; color: var(--muted); background: #fff; padding: 0 6px; }
 .dcols { position: absolute; inset: 0; display: flex; justify-content: center; gap: clamp(40px, 11vw, 96px); }
@@ -219,8 +219,10 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .dbar.ord .dval { bottom: calc(58% + 24% + 6px); color: var(--ink-strong); }
 .dbar.cell .dval { top: calc(42% + 34% + 6px); color: var(--orange-deep); }
 .dbar .dlab { position: absolute; left: 0; right: 0; text-align: center; bottom: -28px; font-size: 13px; font-weight: 700; color: var(--ink-strong); white-space: nowrap; }
-.dbar.cell .dlab { color: var(--orange-deep); }
-.dnote { position: absolute; left: 2%; width: 44%; text-align: center; top: calc(42% + 30px); font-size: 12.5px; font-weight: 700; color: #1f9d55; line-height: 1.35; }
+.dbar.ord .dlab { top: calc(42% + 8px); bottom: auto; }
+.dbar.cell .dlab { color: var(--orange-deep); top: calc(42% + 34% + 26px); bottom: auto; }
+.dbar.cell .dhl { position: absolute; top: 42%; bottom: 24%; left: -9px; right: -9px; background: rgba(245,130,32,0.10); border: 1px solid rgba(245,130,32,0.35); border-radius: 10px; }
+.dbar.cell .dnote { position: absolute; left: 50%; transform: translateX(-50%); top: calc(42% + 34% + 48px); width: 168px; text-align: center; font-size: 12.5px; font-weight: 700; color: #1f9d55; line-height: 1.35; }
 .chart-note { margin-top: 12px; font-size: 14px; color: var(--ink); line-height: 1.5; text-align: center; }
 .chart-note b { color: var(--orange-deep); }
 .hero-rating { font-size: 14.5px; color: var(--ink); }
