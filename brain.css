@@ -277,7 +277,7 @@ h2 { font-size: clamp(32px, 4.4vw, 54px); }
 .tbox:hover { transform: scale(1.02); box-shadow: var(--shadow); position: relative; z-index: 3; border-color: rgba(245,130,32,.4); }
 .tbox.rev .tbox-copy { order: 2; }
 .tbox.rev .tbox-visual { order: 1; }
-.t-num { display: inline-block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 800; margin-bottom: 12px; }
+.t-num { display: inline-block; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); font-weight: 800; margin-bottom: 14px; }
 .tbox-copy h3 { font-size: clamp(23px, 2.3vw, 31px); margin-bottom: 14px; letter-spacing: -0.025em; }
 .tbox-copy p { font-size: 17px; color: var(--ink); margin-top: 13px; line-height: 1.62; }
 .card-chart { background: var(--ice); border: 1px solid var(--line-soft); border-radius: var(--r); padding: clamp(24px, 2.6vw, 34px); }
