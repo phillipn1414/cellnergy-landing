@@ -19,7 +19,8 @@
   .brand b{font-family:"Metropolis";font-weight:800;font-size:32px;letter-spacing:1px;color:var(--ink);}
   .brand span{display:block;font-family:"Metropolis";font-weight:600;font-size:16px;letter-spacing:5px;color:#4D4D4D;margin-top:4px;}
   .top{position:absolute;top:230px;left:72px;width:660px;}
-  .eyebrow{font-family:"Metropolis";font-weight:800;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:24px;}
+  .eyebrow{display:flex;align-items:center;gap:14px;font-family:"Metropolis";font-weight:800;font-size:26px;letter-spacing:3px;text-transform:uppercase;color:var(--ink);margin-bottom:24px;}
+  .eyebrow::before{content:"";width:36px;height:5px;border-radius:3px;background:var(--orange);}
   h1{font-family:"Playfair Display";font-weight:700;font-size:90px;line-height:1.06;letter-spacing:-.5px;color:var(--ink);}
   .support{margin-top:30px;font-family:"Metropolis";font-weight:400;font-size:33px;line-height:1.36;color:var(--ink);max-width:600px;}
   .support b{font-weight:800;}
