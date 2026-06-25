@@ -22,10 +22,10 @@
     { svg: "waves", label: "Terahertz-Frequency Conditioning" },
     { svg: "nutrient", label: "Nutrient Delivery Support" },
     { svg: "bpa", label: "BPA Free" },
-    { chip: true, plain: true, logo: "assets/badges/truemed-orange.svg", label: "FSA Eligible" },
+    { chip: true, plain: true, logo: "https://phillipn1414.github.io/cellnergy-landing/assets/badges/truemed-orange.svg", label: "FSA Eligible" },
     { svg: "shield", label: "90-Day Money-Back Guarantee" },
-    { chip: true, logoOnly: true, logo: "assets/icons/asa-logo.svg", label: "American Society on Aging" },
-    { logo: "assets/badges/bbb.webp", logoOnly: true, label: "BBB Accredited Business" },
+    { chip: true, logoOnly: true, logo: "https://phillipn1414.github.io/cellnergy-landing/assets/icons/asa-logo.svg", label: "American Society on Aging" },
+    { logo: "https://phillipn1414.github.io/cellnergy-landing/assets/badges/bbb.webp", logoOnly: true, label: "BBB Accredited Business" },
   ];
   var track = document.getElementById("marquee-track");
   if (track) {
@@ -72,7 +72,7 @@
   var SHOP = "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect";
   var PLANS = {
     single: {
-      was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: SHOP,
+      was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: (window.CN_LINKS && window.CN_LINKS.single) || SHOP,
       includes: [
         "1 CELLNERGY Hydration System (650 mL / 22 oz)",
         "6-element mineral diffuser installed inside",
@@ -81,7 +81,7 @@
       ],
     },
     triple: {
-      was: "$147", now: "$99", save: "You save $48", badge: "$48", cta: "Get my 3-pack for $99", href: SHOP + "&quantity=3",
+      was: "$147", now: "$99", save: "You save $48", badge: "$48", cta: "Get my 3-pack for $99", href: (window.CN_LINKS && window.CN_LINKS.triple) || (SHOP + "&quantity=3"),
       includes: [
         "3 CELLNERGY Hydration Systems (650 mL / 22 oz)",
         "6-element mineral diffuser installed inside",
