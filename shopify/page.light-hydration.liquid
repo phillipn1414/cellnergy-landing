@@ -2,14 +2,15 @@
 
 {%- comment %}
   CELLNERGY light-hydration landing page.
-  Wire your two variants below, then this template needs no other edits.
-  Find a variant ID: Admin > Products > CELLNERGY > click a variant >
-  the URL ends in .../variants/XXXXXXXXXXXXX  (that number is the ID).
+  INTERIM: both buy buttons go to the live product page (works today).
+  WHEN THE US VARIANTS ARE READY, switch to add-to-cart links, e.g.:
+    single: "/cart/1BOTTLE_VARIANT_ID:1",  triple: "/cart/3PACK_VARIANT_ID:1"
+  (variant ID = Admin > Products > CELLNERGY > click the variant > number at the end of the URL)
 {% endcomment -%}
 <script>
   window.CN_LINKS = {
-    single: "https://shop.lifepharm.com/cart/REPLACE_1BOTTLE_VARIANT_ID:1",
-    triple: "https://shop.lifepharm.com/cart/REPLACE_3PACK_VARIANT_ID:1"
+    single: "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect",
+    triple: "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect"
   };
 </script>
 
@@ -284,7 +285,7 @@
             <span class="now" id="p-now">$39</span>
             <span class="save-pill" id="p-save">You save $10</span>
           </div>
-          <a class="btn block" id="order-cta" href="https://shop.lifepharm.com/cart/REPLACE_1BOTTLE_VARIANT_ID:1">Get mine for $39</a>
+          <a class="btn block" id="order-cta" href="https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect">Get mine for $39</a>
           <div class="guar-line"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>90-Day Money-Back Guarantee</strong></div>
           <label class="bump">
             <input type="checkbox" id="refill-bump" />
