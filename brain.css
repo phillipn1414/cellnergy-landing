@@ -410,7 +410,7 @@ h2 { font-size: clamp(32px, 4.4vw, 54px); }
 .close-info h2 { font-size: clamp(27px, 3vw, 42px); }
 .close-sub { margin: 14px 0 0; max-width: 470px; font-size: 16px; color: var(--ink); }
 .close-price { display: flex; align-items: baseline; gap: 12px; margin: 20px 0 6px; flex-wrap: wrap; }
-.close-price .was { color: var(--muted); text-decoration: line-through; font-size: 24px; }
+.close-price .was { color: var(--ink); font-weight: 700; text-decoration: line-through; text-decoration-color: var(--orange); text-decoration-thickness: 2.5px; font-size: 32px; }
 .close-price .now { color: var(--orange); font-weight: 900; font-size: 56px; letter-spacing: -0.03em; }
 .close-price .save-tag { background: var(--orange-soft); color: var(--orange-deep); font-weight: 800; font-size: 13px; padding: 5px 13px; border-radius: 999px; align-self: center; }
 .close .countline { font-size: 13.5px; color: var(--ink); margin: 8px 0 16px; }
