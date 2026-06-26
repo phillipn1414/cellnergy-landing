@@ -92,7 +92,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .bullets li::before { content: ""; position: absolute; left: 0; top: 1px; width: 26px; height: 26px; border-radius: 50%; background: var(--peach); }
 .bullets li::after { content: "\2713"; position: absolute; left: 6px; top: 1px; color: var(--orange); font-weight: 900; font-size: 16px; line-height: 26px; }
 .price-chip { display: inline-flex; align-items: center; gap: 14px; margin-top: 26px; flex-wrap: wrap; }
-.price-chip .was { color: var(--muted); text-decoration: line-through; font-size: 24px; font-weight: 600; }
+.price-chip .was { color: var(--ink); text-decoration: line-through; text-decoration-thickness: 3px; font-size: 28px; font-weight: 700; }
 .price-chip .now { color: var(--ink-strong); font-weight: 900; font-size: 46px; letter-spacing: -0.02em; line-height: 1; }
 .price-chip .save { background: #1f9d55; color: #fff; font-weight: 800; font-size: 14px; padding: 8px 15px; border-radius: 999px; white-space: nowrap; }
 .hero-cta { margin-top: 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -287,7 +287,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .order .countline { font-size: 14px; color: var(--ink); }
 .order .countline b { color: var(--orange-deep); font-variant-numeric: tabular-nums; }
 .order .pricing { display: flex; align-items: baseline; gap: 14px; margin: 12px 0 4px; flex-wrap: wrap; }
-.order .was { color: var(--muted); text-decoration: line-through; font-size: 21px; }
+.order .was { color: var(--ink); text-decoration: line-through; text-decoration-thickness: 3px; font-size: 28px; font-weight: 700; }
 .order .now { color: var(--ink-strong); font-weight: 800; font-size: 50px; letter-spacing: -0.03em; }
 .order .unit { color: var(--muted); font-size: 15px; font-weight: 600; }
 .order .save { color: var(--orange); font-weight: 700; font-size: 15px; }
