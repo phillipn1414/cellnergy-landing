@@ -6,6 +6,13 @@
 (function () {
   "use strict";
 
+  /* asset base: derived from this script's own URL, so relative assets resolve
+     correctly even when the page is served from another domain (e.g. Shopify). */
+  var AB = (function () {
+    try { var s = document.currentScript; if (s && s.src) return s.src.replace(/[^/]+(?:\?.*)?$/, ""); } catch (e) {}
+    return "";
+  })();
+
   /* ---------- trust marquee ---------- */
   var SVG = {
     shield: '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
@@ -26,9 +33,9 @@
   var track = document.getElementById("marquee-track");
   if (track) {
     var html = ITEMS.map(function (it) {
-      if (it.chip) return '<span class="m-item chip' + (it.plain ? " nobg" : "") + '"><img class="m-logo" src="' + it.logo + '" alt="' + it.label + '">' + (it.logoOnly ? "" : '<span class="m-lab">' + it.label + "</span>") + "</span>";
-      if (it.logoOnly && it.logo) return '<span class="m-item"><img class="m-logo" src="' + it.logo + '" alt="' + it.label + '"></span>';
-      if (it.logo) return '<span class="m-item"><img class="m-logo" src="' + it.logo + '" alt="' + it.label + '"><span class="m-lab">' + it.label + "</span></span>";
+      if (it.chip) return '<span class="m-item chip' + (it.plain ? " nobg" : "") + '"><img class="m-logo" src="' + AB + it.logo + '" alt="' + it.label + '">' + (it.logoOnly ? "" : '<span class="m-lab">' + it.label + "</span>") + "</span>";
+      if (it.logoOnly && it.logo) return '<span class="m-item"><img class="m-logo" src="' + AB + it.logo + '" alt="' + it.label + '"></span>';
+      if (it.logo) return '<span class="m-item"><img class="m-logo" src="' + AB + it.logo + '" alt="' + it.label + '"><span class="m-lab">' + it.label + "</span></span>";
       return '<span class="m-item"><span class="m-ic">' + SVG[it.svg] + '</span><span class="m-lab">' + it.label + "</span></span>";
     }).join("");
     track.innerHTML = html + html;
