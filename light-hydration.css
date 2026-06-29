@@ -315,7 +315,9 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .bump-text { font-size: 15px; color: var(--ink); line-height: 1.5; }
 .bump-text strong { color: var(--ink-strong); }
 .subsave { margin-top: 14px; font-size: 14px; color: var(--muted); line-height: 1.55; }
-.subsave strong { color: var(--orange-deep); }
+.subsave strong { color: #F18A00; }
+.subsave a { color: #F18A00; font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
+.subsave a:hover { color: var(--orange-deep); }
 .wyg { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
 .wyg-head { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-bottom: 14px; }
 .wyg .includes { margin: 0; }

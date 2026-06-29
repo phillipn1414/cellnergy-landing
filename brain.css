@@ -394,7 +394,9 @@ h2 { font-size: clamp(32px, 4.4vw, 54px); }
 .addon-txt { font-size: 14.5px; color: var(--ink); line-height: 1.5; }
 .addon-txt strong { color: var(--ink-strong); }
 .subsave { margin-top: 10px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
-.subsave strong { color: var(--orange-deep); }
+.subsave strong { color: #F18A00; }
+.subsave a { color: #F18A00; font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
+.subsave a:hover { color: var(--orange-deep); }
 /* what you get */
 .whatyouget { margin-top: 20px; }
 .wyg-title { font-size: 12.5px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel-deep); margin-bottom: 8px; }
