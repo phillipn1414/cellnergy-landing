@@ -336,6 +336,23 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 .foot .disc { max-width: 900px; margin: 0 auto; font-size: 12px; color: var(--muted); text-align: center; line-height: 1.65; }
 .foot .copy { text-align: center; margin-top: 20px; font-size: 13px; color: var(--ink); }
 
+/* ============================================================ v2: ONE-MECHANISM PROOF (pH chart + vertical pH-test video) */
+.proof-wrap { max-width: 640px; margin: 0 auto; }
+.proof-bridge { margin: 26px 0 0; font-size: 17px; color: var(--ink); line-height: 1.6; text-align: center; }
+.proof-bridge strong { color: var(--ink-strong); }
+.proof-bridge .foot { display: block; margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+.proof-video { margin-top: 34px; text-align: center; }
+.pv-cap { font-size: clamp(20px, 2.4vw, 26px); font-weight: 800; color: var(--ink-strong); letter-spacing: -0.01em; }
+.ph-video { max-width: 300px; margin: 16px auto 0; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 9 / 16; background: #eef0f2; }
+.ph-video video, .ph-video img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pv-sub { max-width: 340px; margin: 13px auto 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.also-inside { max-width: 560px; margin: 32px auto 0; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+.also-inside .ai-label { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-bottom: 12px; text-align: center; }
+.also-inside ul { list-style: none; padding: 0; margin: 0 auto; max-width: 460px; display: grid; gap: 11px; }
+.also-inside li { position: relative; padding-left: 24px; font-size: 16px; color: var(--ink); line-height: 1.5; }
+.also-inside li strong { color: var(--ink-strong); }
+.also-inside li::before { content: "+"; position: absolute; left: 0; top: -1px; color: var(--orange); font-weight: 900; font-size: 18px; }
+
 /* ============================================================ RESPONSIVE */
 @media (max-width: 980px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
