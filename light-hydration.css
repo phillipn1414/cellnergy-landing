@@ -379,8 +379,10 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 }
 @media (max-width: 760px) {
   .hero { display: block; min-height: 0; }
-  .hero-media { position: relative; width: 100%; height: 42vh; min-height: 280px; }
+  .hero-media { position: relative; width: 100%; height: 30vh; min-height: 200px; max-height: 270px; }
+  .hero-media img.hero-after { object-position: 62% 22%; }
   .hero-media::after { display: none; }
+  .hero .wrap { padding-top: 26px; }
   .hero-content { max-width: none; }
   .hero .wrap { padding-top: 32px; padding-bottom: 44px; }
   .hub-ring { position: static; height: auto; max-width: 540px; display: flex; flex-direction: column; gap: 12px; }
@@ -398,11 +400,11 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
   .compare-wrap { padding: 14px 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .ctable { table-layout: fixed; width: 100%; }
   .ctable th, .ctable td { padding: 10px 3px; font-size: 12px; }
-  .ctable thead th { font-size: 9.5px; letter-spacing: 0; padding-bottom: 12px; line-height: 1.25; word-break: break-word; }
-  .ctable tbody td:first-child, .ctable thead th:first-child { font-size: 11.5px; line-height: 1.3; width: 42%; }
-  .ctable thead th:not(:first-child), .ctable tbody td:not(:first-child) { width: 18%; }
-  .ctable thead .hl-col, .ctable tbody .hl-col { width: 22%; }
-  .ctable thead .hl-col { white-space: nowrap; }
+  .ctable thead th { font-size: 10.5px; letter-spacing: 0; padding-bottom: 12px; line-height: 1.2; }
+  .ctable tbody td:first-child, .ctable thead th:first-child { font-size: 10.5px; line-height: 1.3; width: 39%; }
+  .ctable thead th:not(:first-child), .ctable tbody td:not(:first-child) { width: 17%; }
+  .ctable thead .hl-col, .ctable tbody .hl-col { width: 27%; padding-left: 2px; padding-right: 2px; }
+  .ctable thead .hl-col { white-space: nowrap; font-size: 9px; letter-spacing: -0.03em; }
   .mark-yes { font-size: 15px; }
   .mark-no { font-size: 14px; }
 }
