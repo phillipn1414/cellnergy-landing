@@ -394,6 +394,17 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
   .reviews-list { grid-template-columns: 1fr; }
   .btn { width: 100%; }
   .hero-cta { align-items: stretch; }
+  /* comparison table: shrink to fit the card so the CELLNERGY column stops overflowing */
+  .compare-wrap { padding: 14px 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .ctable { table-layout: fixed; width: 100%; }
+  .ctable th, .ctable td { padding: 10px 3px; font-size: 12px; }
+  .ctable thead th { font-size: 9.5px; letter-spacing: 0; padding-bottom: 12px; line-height: 1.25; word-break: break-word; }
+  .ctable tbody td:first-child, .ctable thead th:first-child { font-size: 11.5px; line-height: 1.3; width: 42%; }
+  .ctable thead th:not(:first-child), .ctable tbody td:not(:first-child) { width: 18%; }
+  .ctable thead .hl-col, .ctable tbody .hl-col { width: 22%; }
+  .ctable thead .hl-col { white-space: nowrap; }
+  .mark-yes { font-size: 15px; }
+  .mark-no { font-size: 14px; }
 }
 @media (max-width: 520px) {
   body { font-size: 19px; }
