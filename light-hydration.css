@@ -402,7 +402,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
   .spoke:hover, .spoke:focus-visible { transform: none; color: var(--ink-strong); border-color: var(--line); box-shadow: var(--shadow-sm); }
   .spoke.open { transform: none; color: var(--ink-strong); border-color: var(--orange); box-shadow: var(--shadow-sm); }
   .spoke .pop, .spoke.up .pop { position: static; transform: none; transition: none; width: 100%; max-width: none; opacity: 1; pointer-events: auto; box-shadow: none; border: 0; border-radius: 0; padding: 0; margin-top: 12px; font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--ink); display: none; }
-  .spoke.open .pop { display: block; }
+  .spoke.open .pop, .spoke:hover .pop, .spoke:focus .pop { display: block; transform: none; left: auto; top: auto; }
 }
 @media (max-width: 600px) {
   .steps { grid-template-columns: 1fr; }
