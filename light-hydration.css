@@ -378,13 +378,20 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
   .offer-visual { max-width: 440px; margin: 0 auto; }
 }
 @media (max-width: 760px) {
-  .hero { display: block; min-height: 0; }
-  .hero-media, .hero-v2 .hero-media { position: relative; width: 100%; height: 30vh; min-height: 200px; max-height: 270px; }
-  .hero-media img.hero-after { object-position: 62% 22%; }
-  .hero-media::after { display: none; }
-  .hero .wrap { padding-top: 26px; }
-  .hero-content { max-width: none; }
-  .hero .wrap { padding-top: 32px; padding-bottom: 44px; }
+  .hero { display: block; min-height: 0; position: relative; }
+  .hero-media, .hero-v2 .hero-media { position: relative; width: 100%; height: 366px; min-height: 366px; max-height: 366px; }
+  .hero-media img.hero-after { object-position: 60% 26%; }
+  .hero-media::after { display: block; inset: 0; background: linear-gradient(to top, rgba(10,7,4,.92) 0%, rgba(10,7,4,.62) 30%, rgba(10,7,4,0) 60%); }
+  .hero-content { max-width: none; text-align: center; }
+  .hero .wrap { padding-top: 26px; padding-bottom: 40px; }
+  .hero-content h1 { position: absolute; left: 0; right: 0; top: 0; transform: translateY(calc(-100% - 18px)); margin: 0; padding: 0 22px; color: #fff; z-index: 3; font-size: clamp(33px, 9vw, 42px); text-shadow: 0 2px 16px rgba(0,0,0,.65); }
+  .hero .sub { margin: 0 auto; max-width: 330px; font-size: 18px; color: var(--muted); }
+  .hero .sub + .price-chip { margin-top: 26px; }
+  .price-chip { position: relative; display: inline-flex; justify-content: center; align-items: baseline; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px 34px; box-shadow: 0 14px 38px rgba(0,0,0,.10); }
+  .price-chip .now { font-size: 52px; }
+  .price-chip .save { position: absolute; top: -13px; right: -8px; margin: 0; font-size: 12px; padding: 7px 14px; box-shadow: 0 6px 18px rgba(31,157,85,.45); }
+  .hero-cta { align-items: stretch; margin-top: 26px; }
+  .hero-cta .reassure { justify-content: center; }
   .hub-ring { position: static; height: auto; max-width: 540px; display: flex; flex-direction: column; gap: 12px; }
   .hub-center { position: static; transform: none; width: 100%; height: auto; border-radius: 18px; padding: 22px 24px; order: -1; margin-bottom: 4px; font-size: 17px; }
   .spoke { position: static; transform: none; width: 100%; text-align: left; border-radius: 16px; padding: 18px 20px; font-size: 17px; font-weight: 800; color: var(--ink-strong); box-shadow: var(--shadow-sm); border: 1px solid var(--line); cursor: default; white-space: normal; }
