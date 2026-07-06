@@ -363,11 +363,10 @@
 
     /* ---------- checkout URL: adds the bottle + applies the page-only discount code ---------- */
     function co(v, code) { return "https://shop.lifepharm.com/cart/" + v + ":1?discount=" + code; }
-    function fbAddToCart(value) { if (window.fbq) { try { fbq("track", "AddToCart", { content_type: "product", currency: "USD", value: value }); } catch (e) {} } }
 
-    /* ---------- secondary CTAs (announce, hero, mid-page strips): 1 bottle -> checkout w/ MEAL10 ---------- */
+    /* ---------- secondary CTAs (announce, hero, mid-page strips): 1 bottle -> checkout w/ MEAL10
+       (AddToCart pixel is fired by the click-listener in lp.liquid, so we don't fire it again here) ---------- */
     function buySingle() {
-      fbAddToCart(39);
       window.location.href = co(CN_CART.single.variant, "MEAL10");
     }
     document.querySelectorAll('a[href="#offer"]').forEach(function (a) {
@@ -466,14 +465,8 @@
     });
     applyPlan("single");
 
-    /* ---------- order CTA: fire pixel, then go straight to the discounted checkout (href set per plan) ---------- */
-    if (elCta) {
-      elCta.addEventListener("click", function () {
-        var plan = PLANS[currentPlan] || PLANS.single;
-        fbAddToCart(parseFloat(String(plan.now).replace(/[^0-9.]/g, "")) || 39);
-        // href already points to the cart+discount checkout link (set in applyPlan); let it navigate
-      });
-    }
+    /* ---------- order CTA: its href is the discounted checkout link (set per plan in applyPlan);
+       clicking just navigates. AddToCart pixel is handled by lp.liquid's click-listener. ---------- */
 
     /* ---------- countdown ---------- */
     var CYCLE = 15 * 60, remain = CYCLE;
