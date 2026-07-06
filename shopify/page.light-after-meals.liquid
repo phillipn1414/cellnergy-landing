@@ -1,9 +1,15 @@
 {% layout 'lp' %}
-<link rel="stylesheet" href="https://phillipn1414.github.io/cellnergy-landing/light-hydration.css?v=20">
+<link rel="stylesheet" href="https://phillipn1414.github.io/cellnergy-landing/light-hydration.css?v=21">
 <script>
-  window.CN_LINKS = {
-    single: "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect",
-    triple: "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect"
+  /* CART SETUP — edit these numbers here (this is your live file).
+     Variant ID: Products > CELLNERGY > click a variant > number at the end of the URL. */
+  window.CN_CART = {
+    single: { variant: 53040002400565 },   // 1 Bottle
+    triple: { variant: 53003471388981 },   // 3 Bottles
+    // 6-MONTH REFILL 3-PACK (the checkbox). Paste the refill variant ID below.
+    // Leave sellingPlan null for a one-time buy, OR paste a Subscribe & Save
+    // selling-plan ID to make the refill auto-ship.
+    refill: { variant: null, sellingPlan: null }
   };
 </script>
 
@@ -251,6 +257,7 @@
           </div>
           <a class="btn block" id="order-cta" href="https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect">Get mine for $39</a>
           <div class="guar-line"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>90-Day Money-Back Guarantee</strong></div>
+          <p style="font-size:12.5px;color:#8a8a8a;margin-top:10px;line-height:1.4;">Discount applied automatically at checkout. Shipping and tax calculated at checkout.</p>
           <label class="bump">
             <input type="checkbox" id="refill-bump" />
             <span class="bump-text"><strong>Add a 6-month refill 3-pack</strong> and save 15%. The mineral diffuser swaps every 2 months, this keeps your water at its best.</span>
@@ -284,11 +291,11 @@
         </div>
         <div class="faq-item">
           <button class="faq-q">What makes CELLNERGY water gentler?</button>
-          <div class="faq-a"><p>Ordinary water is slightly acidic. A mineral diffuser raises CELLNERGY to a balanced, gently alkaline pH (about 9 in our testing), so it is smoother and easier to drink, especially with a meal. Every fill is also antioxidant-rich from molecular hydrogen, with a final terahertz conditioning step, so the water feels light and fresh.*</p></div>
+          <div class="faq-a"><p>Ordinary water is slightly acidic. A mineral diffuser raises CELLNERGY to a balanced, gently alkaline pH (about 9, measured in LifePharm product testing), so it is smoother and easier to drink, especially with a meal. Every fill is also antioxidant-rich from molecular hydrogen, with a final terahertz conditioning step, so the water feels light and fresh.*</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Is there proof of the pH?</button>
-          <div class="faq-a"><p>Yes. In our own product testing, ordinary water measured slightly acidic (around pH 7.8) and CELLNERGY measured gently alkaline (around pH 9) &mdash; you can watch the test above. Measured in LifePharm product testing; individual results vary.*</p></div>
+          <div class="faq-a"><p>Yes. In LifePharm product testing, ordinary water measured slightly acidic (around pH 7.8) and CELLNERGY measured gently alkaline (around pH 9) &mdash; you can watch the test above. Individual results vary.*</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Will the water really feel different?</button>
@@ -316,10 +323,214 @@
 
   <!-- FOOTER -->
   <footer class="foot">
-    <p class="disc">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease, including acid reflux or any digestive condition. The CELLNERGY Hydration System is a hydration product, not a medical device. Alkaline pH and antioxidant (ORP) values are based on our own product testing, not third-party laboratory testing. Individual experiences vary.</p>
+    <p class="disc">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease, including acid reflux or any digestive condition. The CELLNERGY Hydration System is a hydration product, not a medical device. pH values were measured in LifePharm product testing; individual results vary.</p>
     <p class="copy">Exclusively distributed by LifePharm Inc., Irvine, CA, USA. &copy; 2026 LifePharm.</p>
   </footer>
 
   <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
-  <script src="https://phillipn1414.github.io/cellnergy-landing/light-after-meals.js?v=1"></script>
+  <script>
+  (function () {
+    "use strict";
+
+    /* CART: reads window.CN_CART set at the top of this template. */
+    var CN_CART = window.CN_CART = window.CN_CART || {};
+    CN_CART.single = CN_CART.single || { variant: 53040002400565 };
+    CN_CART.triple = CN_CART.triple || { variant: 53003471388981 };
+    CN_CART.refill = CN_CART.refill || { variant: null, sellingPlan: null };
+    var onShopify = (CN_CART.onShopify != null) ? CN_CART.onShopify : !!window.Shopify;
+
+    function addToCart(items) {
+      return fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ items: items })
+      }).then(function (r) { if (!r.ok) throw new Error("cart add failed"); return r.json(); });
+    }
+    function openCartDrawer() {
+      try {
+        document.dispatchEvent(new CustomEvent("cart:refresh", { bubbles: true }));
+        document.dispatchEvent(new CustomEvent("cart:build", { bubbles: true }));
+      } catch (e) {}
+      var dr = document.querySelector("cart-drawer");
+      if (dr && typeof dr.open === "function") { dr.open(); return; }
+      if (dr) { dr.classList.remove("is-empty"); }
+      var sel = CN_CART.drawerToggle ||
+        '#cart-icon-bubble,[data-cart-drawer-toggle],.js-drawer-open-cart,#CartDrawer-Toggle,.header__icon--cart,a[href="/cart"],a[href^="/cart"]';
+      var t = document.querySelector(sel);
+      if (t) { t.click(); return; }
+      window.location.href = "/cart";
+    }
+
+    /* ---------- checkout URL: adds the bottle + applies the page-only discount code ---------- */
+    function co(v, code) { return "https://shop.lifepharm.com/cart/" + v + ":1?discount=" + code; }
+    function fbAddToCart(value) { if (window.fbq) { try { fbq("track", "AddToCart", { content_type: "product", currency: "USD", value: value }); } catch (e) {} } }
+
+    /* ---------- secondary CTAs (announce, hero, mid-page strips): 1 bottle -> checkout w/ MEAL10 ---------- */
+    function buySingle() {
+      fbAddToCart(39);
+      window.location.href = co(CN_CART.single.variant, "MEAL10");
+    }
+    document.querySelectorAll('a[href="#offer"]').forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); buySingle(); });
+    });
+
+    /* ---------- trust marquee ---------- */
+    var SVG = {
+      shield: '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+      bpa: '<svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M4 4l16 16"/></svg>'
+    };
+    var ITEMS = [
+      { svg: "shield", label: "90-Day Money-Back Guarantee" },
+      { chip: true, plain: true, logo: "https://phillipn1414.github.io/cellnergy-landing/assets/badges/truemed-orange.svg", label: "FSA Eligible" },
+      { logo: "https://phillipn1414.github.io/cellnergy-landing/assets/badges/bbb.webp", logoOnly: true, label: "BBB Accredited Business" },
+      { chip: true, logoOnly: true, logo: "https://phillipn1414.github.io/cellnergy-landing/assets/icons/asa-logo.svg", label: "American Society on Aging" },
+      { svg: "bpa", label: "BPA Free" }
+    ];
+    var track = document.getElementById("marquee-track");
+    if (track) {
+      var html = ITEMS.map(function (it) {
+        if (it.chip) return '<span class="m-item chip' + (it.plain ? " nobg" : "") + '"><img class="m-logo" src="' + it.logo + '" alt="' + it.label + '">' + (it.logoOnly ? "" : '<span class="m-lab">' + it.label + "</span>") + "</span>";
+        if (it.logoOnly) return '<span class="m-item"><img class="m-logo" src="' + it.logo + '" alt="' + it.label + '"></span>';
+        if (it.logo) return '<span class="m-item"><img class="m-logo" src="' + it.logo + '" alt="' + it.label + '"><span class="m-lab">' + it.label + "</span></span>";
+        return '<span class="m-item"><span class="m-ic">' + SVG[it.svg] + '</span><span class="m-lab">' + it.label + "</span></span>";
+      }).join("");
+      track.innerHTML = html + html;
+    }
+
+    /* ---------- problem hub ---------- */
+    var spokes = document.querySelectorAll(".spoke");
+    spokes.forEach(function (s) {
+      s.addEventListener("click", function (e) {
+        e.preventDefault();
+        var wasOpen = s.classList.contains("open");
+        spokes.forEach(function (o) { o.classList.remove("open"); });
+        if (!wasOpen) s.classList.add("open");
+      });
+    });
+
+    /* ---------- comparison ---------- */
+    var glance = document.querySelector(".glance");
+    if (glance) {
+      glance.addEventListener("click", function (e) {
+        if (e.target.closest("a")) return;
+        glance.classList.toggle("open");
+      });
+    }
+
+    /* ---------- FAQ accordion ---------- */
+    document.querySelectorAll(".faq-item").forEach(function (item) {
+      var q = item.querySelector(".faq-q"), a = item.querySelector(".faq-a");
+      q.addEventListener("click", function () {
+        var open = item.classList.contains("open");
+        document.querySelectorAll(".faq-item.open").forEach(function (o) { o.classList.remove("open"); o.querySelector(".faq-a").style.maxHeight = null; });
+        if (!open) { item.classList.add("open"); a.style.maxHeight = a.scrollHeight + "px"; }
+      });
+    });
+
+    /* ---------- buy tabs ---------- */
+    var PLANS = {
+      single: {
+        variant: CN_CART.single.variant,
+        was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: co(CN_CART.single.variant, "MEAL10"),
+        includes: ["1 CELLNERGY Hydration System (650 mL / 22 oz)", "6-element mineral diffuser installed inside", "90-day money-back guarantee", "HSA / FSA accepted"]
+      },
+      triple: {
+        variant: CN_CART.triple.variant,
+        was: "$119", now: "$99", save: "You save $20", badge: "$20", cta: "Get my 3-pack for $99", href: co(CN_CART.triple.variant, "MEAL20"),
+        includes: ["3 CELLNERGY Hydration Systems (650 mL / 22 oz)", "6-element mineral diffuser installed inside", "90-day money-back guarantee", "HSA / FSA accepted"]
+      }
+    };
+    var currentPlan = "single";
+    var elWas = document.getElementById("p-was"), elNow = document.getElementById("p-now"),
+        elSave = document.getElementById("p-save"), elCta = document.getElementById("order-cta"),
+        elInc = document.getElementById("p-includes"), elAmt = document.getElementById("save-amt"),
+        buyTabs = [].slice.call(document.querySelectorAll(".buy-tab"));
+    function applyPlan(key) {
+      var p = PLANS[key];
+      if (!p) return;
+      currentPlan = key;
+      if (elWas) elWas.textContent = p.was;
+      if (elNow) elNow.textContent = p.now;
+      if (elSave) elSave.textContent = p.save;
+      if (elAmt) elAmt.textContent = p.badge;
+      if (elInc) elInc.innerHTML = p.includes.map(function (i) { return "<li>" + i + "</li>"; }).join("");
+      if (elCta) { elCta.textContent = p.cta; elCta.setAttribute("href", p.href); }
+      buyTabs.forEach(function (t) {
+        var on = t.getAttribute("data-plan") === key;
+        t.classList.toggle("active", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+    }
+    buyTabs.forEach(function (t) {
+      t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
+    });
+    applyPlan("single");
+
+    /* ---------- order CTA: fire pixel, then go straight to the discounted checkout (href set per plan) ---------- */
+    if (elCta) {
+      elCta.addEventListener("click", function () {
+        var plan = PLANS[currentPlan] || PLANS.single;
+        fbAddToCart(parseFloat(String(plan.now).replace(/[^0-9.]/g, "")) || 39);
+        // href already points to the cart+discount checkout link (set in applyPlan); let it navigate
+      });
+    }
+
+    /* ---------- countdown ---------- */
+    var CYCLE = 15 * 60, remain = CYCLE;
+    var aTime = document.getElementById("a-time"), oTime = document.getElementById("o-time");
+    function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+    function tickDown() {
+      var t = fmt(remain);
+      if (aTime) aTime.textContent = t;
+      if (oTime) oTime.textContent = t;
+      remain--;
+      if (remain < 0) remain = CYCLE;
+    }
+    if (aTime || oTime) { tickDown(); setInterval(tickDown, 1000); }
+
+    /* ---------- video poster fallback ---------- */
+    ["ph-vid", "vid-inside", "vid-offer"].forEach(function (id) {
+      var v = document.getElementById(id);
+      if (!v) return;
+      v.addEventListener("error", function () {
+        var img = document.createElement("img");
+        img.src = v.getAttribute("poster") || "";
+        img.alt = v.getAttribute("aria-label") || "";
+        v.replaceWith(img);
+      });
+    });
+
+    /* ---------- Lenis + reveals ---------- */
+    var lenis = null;
+    if (window.Lenis) { lenis = new Lenis({ lerp: 0.09, smoothWheel: true }); window.__lenis = lenis; }
+    function raf(t) { if (lenis) lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+    function revealInView() {
+      var h = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = reveals.length - 1; i >= 0; i--) {
+        if (reveals[i].getBoundingClientRect().top < h * 0.9) { reveals[i].classList.add("in"); reveals.splice(i, 1); }
+      }
+    }
+    revealInView();
+    if (lenis && lenis.on) lenis.on("scroll", revealInView);
+    window.addEventListener("scroll", revealInView, { passive: true });
+    window.addEventListener("resize", revealInView);
+    setTimeout(revealInView, 300);
+    setTimeout(revealInView, 1200);
+
+    /* ---------- anchor smooth scroll ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var id = a.getAttribute("href");
+        if (id.length < 2 || id === "#offer") return; // #offer buttons add to cart, don't scroll
+        var target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis && lenis.scrollTo) lenis.scrollTo(target, { offset: -60 });
+        else target.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  })();
+  </script>
 
