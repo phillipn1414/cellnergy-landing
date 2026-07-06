@@ -379,7 +379,7 @@ h2 { font-size: clamp(30px, 4.1vw, 50px); }
 }
 @media (max-width: 760px) {
   .hero { display: block; min-height: 0; }
-  .hero-media { position: relative; width: 100%; height: 30vh; min-height: 200px; max-height: 270px; }
+  .hero-media, .hero-v2 .hero-media { position: relative; width: 100%; height: 30vh; min-height: 200px; max-height: 270px; }
   .hero-media img.hero-after { object-position: 62% 22%; }
   .hero-media::after { display: none; }
   .hero .wrap { padding-top: 26px; }

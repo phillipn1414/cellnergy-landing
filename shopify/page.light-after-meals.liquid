@@ -258,11 +258,6 @@
           <a class="btn block" id="order-cta" href="https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect">Get mine for $39</a>
           <div class="guar-line"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>90-Day Money-Back Guarantee</strong></div>
           <p style="font-size:12.5px;color:#8a8a8a;margin-top:10px;line-height:1.4;">Discount applied automatically at checkout. Shipping and tax calculated at checkout.</p>
-          <label class="bump">
-            <input type="checkbox" id="refill-bump" />
-            <span class="bump-text"><strong>Add a 6-month refill 3-pack</strong> and save 15%. The mineral diffuser swaps every 2 months, this keeps your water at its best.</span>
-          </label>
-          <p class="subsave">Prefer set-and-forget? Choose <strong>Subscribe &amp; Save</strong> at checkout and we auto-ship refills every 2 months at 15% off. Cancel anytime.</p>
           <div class="wyg">
             <h3 class="wyg-head">What you get</h3>
             <ul class="includes" id="p-includes">
@@ -362,7 +357,7 @@
     }
 
     /* ---------- checkout URL: adds the bottle + applies the page-only discount code ---------- */
-    function co(v, code) { return "https://shop.lifepharm.com/cart/" + v + ":1?discount=" + code; }
+    function co(v, code) { return "https://shop.lifepharm.com/discount/" + code + "?redirect=/cart/" + v + ":1"; }
 
     /* ---------- secondary CTAs (announce, hero, mid-page strips): 1 bottle -> checkout w/ MEAL10
        (AddToCart pixel is fired by the click-listener in lp.liquid, so we don't fire it again here) ---------- */
