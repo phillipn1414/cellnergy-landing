@@ -258,6 +258,10 @@
           <a class="btn block" id="order-cta" href="https://shop.lifepharm.com/discount/MEAL10?redirect=/cart/53040002400565:1">Get mine for $39</a>
           <div class="guar-line"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><strong>90-Day Money-Back Guarantee</strong></div>
           <p style="font-size:12.5px;color:#8a8a8a;margin-top:10px;line-height:1.4;">Discount applied automatically at checkout. Shipping and tax calculated at checkout.</p>
+          <label class="bump">
+            <input type="checkbox" id="diffuser-bump" />
+            <span class="bump-text"><strong>Add a <a href="https://shop.lifepharm.com/products/cellnergy-diffuser-replacement?ref=RetailDirect" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:#F18A00;text-decoration:underline;">CELLNERGY Diffuser Replacement &#8599;</a></strong> (+$25) &mdash; your mineral diffuser swaps about every 2 months, so keep a fresh one on hand.</span>
+          </label>
           <div class="wyg">
             <h3 class="wyg-head">What you get</h3>
             <ul class="includes" id="p-includes">
@@ -357,7 +361,7 @@
     }
 
     /* ---------- checkout URL: adds the bottle + applies the page-only discount code ---------- */
-    function co(v, code) { return "https://shop.lifepharm.com/discount/" + code + "?redirect=/cart/" + v + ":1"; }
+    function co(v, code, diffuser) { var cart = "/cart/" + v + ":1"; if (diffuser) cart += ",53049168167221:1"; return "https://shop.lifepharm.com/discount/" + code + "?redirect=" + cart; }
 
     /* ---------- secondary CTAs (announce, hero, mid-page strips): 1 bottle -> checkout w/ MEAL10
        (AddToCart pixel is fired by the click-listener in lp.liquid, so we don't fire it again here) ---------- */
@@ -425,12 +429,12 @@
     var PLANS = {
       single: {
         variant: CN_CART.single.variant,
-        was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: co(CN_CART.single.variant, "MEAL10"),
+        was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", code: "MEAL10",
         includes: ["1 CELLNERGY Hydration System (650 mL / 22 oz)", "6-element mineral diffuser installed inside", "90-day money-back guarantee", "HSA / FSA accepted"]
       },
       triple: {
         variant: CN_CART.triple.variant,
-        was: "$119", now: "$99", save: "You save $20", badge: "$20", cta: "Get my 3-pack for $99", href: co(CN_CART.triple.variant, "MEAL20"),
+        was: "$119", now: "$99", save: "You save $20", badge: "$20", cta: "Get my 3-pack for $99", code: "MEAL20",
         includes: ["3 CELLNERGY Hydration Systems (650 mL / 22 oz)", "6-element mineral diffuser installed inside", "90-day money-back guarantee", "HSA / FSA accepted"]
       }
     };
@@ -448,7 +452,7 @@
       if (elSave) elSave.textContent = p.save;
       if (elAmt) elAmt.textContent = p.badge;
       if (elInc) elInc.innerHTML = p.includes.map(function (i) { return "<li>" + i + "</li>"; }).join("");
-      if (elCta) { elCta.textContent = p.cta; elCta.setAttribute("href", p.href); }
+      if (elCta) { var bump = document.getElementById("diffuser-bump"); elCta.textContent = p.cta; elCta.setAttribute("href", co(p.variant, p.code, bump && bump.checked)); }
       buyTabs.forEach(function (t) {
         var on = t.getAttribute("data-plan") === key;
         t.classList.toggle("active", on);
@@ -459,6 +463,8 @@
       t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
     });
     applyPlan("single");
+    var _bump = document.getElementById("diffuser-bump");
+    if (_bump) _bump.addEventListener("change", function () { applyPlan(currentPlan); });
 
     /* ---------- order CTA: its href is the discounted checkout link (set per plan in applyPlan);
        clicking just navigates. AddToCart pixel is handled by lp.liquid's click-listener. ---------- */
