@@ -7,6 +7,63 @@
 (function () {
   "use strict";
 
+  /* ============================================================
+     CART CONFIG — the ONLY place to edit product IDs.
+     Find a variant ID in Shopify: Products > CELLNERGY Hydration
+     System > click the variant > copy the number at the end of
+     the URL (…?variant=XXXXXXXXXXXX).
+     On Shopify, the page template sets window.CN_CART and those
+     numbers win; the defaults below are used on the standalone page.
+     ============================================================ */
+  var CN_CART = window.CN_CART = window.CN_CART || {};
+  CN_CART.single = CN_CART.single || { variant: 53040002400565 };   // 1 Bottle
+  CN_CART.triple = CN_CART.triple || { variant: 53003471388981 };   // 3 Bottles
+  // 6-MONTH REFILL 3-PACK (the "Add a 6-month refill 3-pack" checkbox).
+  //   variant     -> paste the refill 3-pack variant ID here.
+  //   sellingPlan -> leave null for a one-time buy, OR paste a
+  //                  Subscribe & Save selling-plan ID to auto-ship it.
+  CN_CART.refill = CN_CART.refill || { variant: null, sellingPlan: null };
+  // Auto-detects: uses the Shopify AJAX cart + drawer when running on
+  // your Shopify store, and just links to the product page anywhere else.
+  var onShopify = (CN_CART.onShopify != null) ? CN_CART.onShopify : !!window.Shopify;
+
+  /* ---------- add to cart (AJAX) + open the theme's cart drawer ---------- */
+  function addToCart(items) {
+    return fetch("/cart/add.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ items: items })
+    }).then(function (r) { if (!r.ok) throw new Error("cart add failed"); return r.json(); });
+  }
+  function openCartDrawer() {
+    try {
+      document.dispatchEvent(new CustomEvent("cart:refresh", { bubbles: true }));
+      document.dispatchEvent(new CustomEvent("cart:build", { bubbles: true }));
+    } catch (e) {}
+    var dr = document.querySelector("cart-drawer");
+    if (dr && typeof dr.open === "function") { dr.open(); return; }
+    if (dr) { dr.classList.remove("is-empty"); }
+    var sel = CN_CART.drawerToggle ||
+      '#cart-icon-bubble,[data-cart-drawer-toggle],.js-drawer-open-cart,#CartDrawer-Toggle,.header__icon--cart,a[href="/cart"],a[href^="/cart"]';
+    var t = document.querySelector(sel);
+    if (t) { t.click(); return; }
+    window.location.href = "/cart"; // last resort: never lose the add
+  }
+
+  /* ---------- product URL helper ---------- */
+  var PDP = "https://shop.lifepharm.com/products/cellnergy-hydration-system";
+  function pdp(v) { return PDP + "?variant=" + v + "&ref=RetailDirect"; }
+
+  /* ---------- secondary CTAs (announce, hero, mid-page strips): add 1 bottle + open drawer ---------- */
+  function buySingle() {
+    var url = pdp(CN_CART.single.variant);
+    if (!onShopify || !CN_CART.single.variant) { window.location.href = url; return; }
+    addToCart([{ id: CN_CART.single.variant, quantity: 1 }]).then(openCartDrawer).catch(function () { window.location.href = url; });
+  }
+  document.querySelectorAll('a[href="#offer"]').forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); buySingle(); });
+  });
+
   /* ---------- trust marquee (icon + label, larger) ---------- */
   var SVG = {
     crystal: '<svg viewBox="0 0 24 24"><path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18"/></svg>',
@@ -66,10 +123,10 @@
   });
 
   /* ---------- buy tabs: 1 bottle vs 3 bottles (drives price, button, save badge, what-you-get) ---------- */
-  var SHOP = "https://shop.lifepharm.com/products/cellnergy-hydration-system?ref=RetailDirect";
   var PLANS = {
     single: {
-      was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: (window.CN_LINKS && window.CN_LINKS.single) || SHOP,
+      variant: CN_CART.single.variant,
+      was: "$49", now: "$39", save: "You save $10", badge: "$10", cta: "Get mine for $39", href: pdp(CN_CART.single.variant),
       includes: [
         "1 CELLNERGY Hydration System (650 mL / 22 oz)",
         "6-element mineral diffuser installed inside",
@@ -78,7 +135,8 @@
       ],
     },
     triple: {
-      was: "$147", now: "$99", save: "You save $48", badge: "$48", cta: "Get my 3-pack for $99", href: (window.CN_LINKS && window.CN_LINKS.triple) || (SHOP + "&quantity=3"),
+      variant: CN_CART.triple.variant,
+      was: "$147", now: "$99", save: "You save $48", badge: "$48", cta: "Get my 3-pack for $99", href: pdp(CN_CART.triple.variant),
       includes: [
         "3 CELLNERGY Hydration Systems (650 mL / 22 oz)",
         "6-element mineral diffuser installed inside",
@@ -87,6 +145,7 @@
       ],
     },
   };
+  var currentPlan = "single";
   var elWas = document.getElementById("p-was"),
       elNow = document.getElementById("p-now"),
       elSave = document.getElementById("p-save"),
@@ -97,6 +156,7 @@
   function applyPlan(key) {
     var p = PLANS[key];
     if (!p) return;
+    currentPlan = key;
     if (elWas) elWas.textContent = p.was;
     if (elNow) elNow.textContent = p.now;
     if (elSave) elSave.textContent = p.save;
@@ -112,21 +172,52 @@
   buyTabs.forEach(function (t) {
     t.addEventListener("click", function () { applyPlan(t.getAttribute("data-plan")); });
   });
+  applyPlan("single"); // set initial state (button link carries the variant)
 
-  /* ---------- launch countdown: 15-minute timer that resets when it hits zero ---------- */
-  var CYCLE = 15 * 60;
-  var remain = CYCLE;
+  /* ---------- CTA: add to cart + open the drawer (on Shopify); link out otherwise ---------- */
+  if (elCta) {
+    elCta.addEventListener("click", function (e) {
+      var plan = PLANS[currentPlan] || PLANS.single;
+      if (!onShopify || !plan.variant) return; // let the button's href handle it
+      e.preventDefault();
+      var items = [{ id: plan.variant, quantity: 1 }];
+      var bump = document.getElementById("refill-bump");
+      if (bump && bump.checked && CN_CART.refill && CN_CART.refill.variant) {
+        var refill = { id: CN_CART.refill.variant, quantity: 1 };
+        if (CN_CART.refill.sellingPlan) refill.selling_plan = CN_CART.refill.sellingPlan;
+        items.push(refill);
+      }
+      var label = elCta.textContent;
+      elCta.textContent = "Adding…";
+      addToCart(items).then(function () {
+        elCta.textContent = label;
+        openCartDrawer();
+      }).catch(function () {
+        window.location.href = plan.href; // AJAX failed: fall back so the sale isn't lost
+      });
+    });
+  }
+
+  /* ---------- launch countdown: evergreen 15 min from first visit, persists across refresh, no loop ---------- */
+  var CYCLE = 15 * 60 * 1000; // 15 minutes in ms
+  var KEY = "lam_offer_deadline";
   var aTime = document.getElementById("a-time");
   var oTime = document.getElementById("o-time");
+  var deadline = parseInt(localStorage.getItem(KEY), 10);
+  if (!deadline || isNaN(deadline)) {
+    deadline = Date.now() + CYCLE;
+    try { localStorage.setItem(KEY, deadline); } catch (e) {}
+  }
   function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+  var ivl;
   function tickDown() {
+    var remain = Math.max(0, Math.round((deadline - Date.now()) / 1000));
     var t = fmt(remain);
     if (aTime) aTime.textContent = t;
     if (oTime) oTime.textContent = t;
-    remain--;
-    if (remain < 0) remain = CYCLE; // reset every 15 minutes
+    if (remain <= 0 && ivl) clearInterval(ivl); // stop at 0:00, no reset
   }
-  if (aTime || oTime) { tickDown(); setInterval(tickDown, 1000); }
+  if (aTime || oTime) { tickDown(); ivl = setInterval(tickDown, 1000); }
 
   /* ---------- video posters: fall back to the still if a clip cannot play ---------- */
   ["ph-vid", "vid-inside", "vid-offer"].forEach(function (id) {
@@ -164,7 +255,7 @@
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
-      if (id.length < 2) return;
+      if (id.length < 2 || id === "#offer") return; // #offer buttons add to cart, don't scroll
       var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();

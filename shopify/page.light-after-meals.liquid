@@ -469,18 +469,25 @@
     /* ---------- order CTA: its href is the discounted checkout link (set per plan in applyPlan);
        clicking just navigates. AddToCart pixel is handled by lp.liquid's click-listener. ---------- */
 
-    /* ---------- countdown ---------- */
-    var CYCLE = 15 * 60, remain = CYCLE;
+    /* ---------- countdown (evergreen: 15 min from first visit, persists across refresh, no loop) ---------- */
+    var CYCLE = 15 * 60 * 1000; // 15 minutes in ms
+    var KEY = "lam_offer_deadline";
     var aTime = document.getElementById("a-time"), oTime = document.getElementById("o-time");
+    var deadline = parseInt(localStorage.getItem(KEY), 10);
+    if (!deadline || isNaN(deadline)) {
+      deadline = Date.now() + CYCLE;
+      try { localStorage.setItem(KEY, deadline); } catch (e) {}
+    }
     function fmt(s) { var m = Math.floor(s / 60), ss = s % 60; return m + ":" + (ss < 10 ? "0" : "") + ss; }
+    var ivl;
     function tickDown() {
+      var remain = Math.max(0, Math.round((deadline - Date.now()) / 1000));
       var t = fmt(remain);
       if (aTime) aTime.textContent = t;
       if (oTime) oTime.textContent = t;
-      remain--;
-      if (remain < 0) remain = CYCLE;
+      if (remain <= 0 && ivl) clearInterval(ivl);
     }
-    if (aTime || oTime) { tickDown(); setInterval(tickDown, 1000); }
+    if (aTime || oTime) { tickDown(); ivl = setInterval(tickDown, 1000); }
 
     /* ---------- video poster fallback ---------- */
     ["ph-vid", "vid-inside", "vid-offer"].forEach(function (id) {
