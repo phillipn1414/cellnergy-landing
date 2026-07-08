@@ -284,10 +284,10 @@
         <h2>What customers are <span class="grad">saying.</span></h2>
       </div>
 
-      <!-- Stamped auto-detects #stamped-main-widget and renders the review list +
-           the built-in "Write a review" button. The Stamped script loads on this page
-           via {{ content_for_header }} in lp.liquid. Product data hardcoded because
-           this is a page template (no `product` object). -->
+      <!-- Stamped auto-detects the stamped-main-widget container and renders the review
+           list plus the built-in Write-a-review button. Its script is loaded site-wide by
+           the Stamped app. Product data is hardcoded here since a page template has no
+           product object. -->
       <style>
         #reviews-all .reviews-all-sub { text-align: center; font-size: 15px; color: #7a7a7a; margin: -6px 0 24px; }
         #stamped-main-widget { max-width: 900px; margin: 0 auto; }
