@@ -1,5 +1,5 @@
 {% layout 'lp' %}
-<link rel="stylesheet" href="https://phillipn1414.github.io/cellnergy-landing/light-hydration.css?v=22">
+{{ 'light-hydration.css' | asset_url | stylesheet_tag }}
 <script>
   /* CART SETUP — edit these numbers here (this is your live file).
      Variant ID: Products > CELLNERGY > click a variant > number at the end of the URL. */
@@ -25,7 +25,7 @@
   <!-- 02 HERO -->
   <header class="hero hero-v2" id="top">
     <div class="hero-media">
-      <img src="https://phillipn1414.github.io/cellnergy-landing/assets/hero-after-meals.jpg" class="hero-after" alt="A happy couple relaxing together after a big home-cooked family dinner" />
+      <img src="{{ 'hero-after-meals.jpg' | asset_url }}" class="hero-after" alt="A happy couple relaxing together after a big home-cooked family dinner" />
     </div>
     <div class="wrap">
       <div class="hero-content">
@@ -101,7 +101,9 @@
           <div class="proof-video">
             <p class="pv-cap">See the difference for yourself.</p>
             <div class="ph-video">
-              <video id="ph-vid" src="{{ page.metafields.custom.demo_video_url | default: 'https://phillipn1414.github.io/cellnergy-landing/assets/ph-test.mp4' }}" poster="{{ page.metafields.custom.demo_poster_url | default: 'https://phillipn1414.github.io/cellnergy-landing/assets/ph-thumb.jpg' }}" controls playsinline loop preload="metadata" aria-label="A pH test: ordinary water poured into the CELLNERGY bottle turns from green to blue as it becomes alkaline"></video>
+              {%- assign ph_vid_fallback = 'ph-test.mp4' | asset_url -%}
+              {%- assign ph_poster_fallback = 'ph-thumb.jpg' | asset_url -%}
+              <video id="ph-vid" src="{{ page.metafields.custom.demo_video_url | default: ph_vid_fallback }}" poster="{{ page.metafields.custom.demo_poster_url | default: ph_poster_fallback }}" controls playsinline loop preload="metadata" aria-label="A pH test: ordinary water poured into the CELLNERGY bottle turns from green to blue as it becomes alkaline"></video>
             </div>
             <p class="pv-sub">A pH indicator shows it: <strong>green</strong> is more acidic, <strong>blue</strong> is alkaline. Same water, made gently alkaline by CELLNERGY.</p>
           </div>
@@ -174,7 +176,7 @@
             <li>Made for the meals you love, and the hour after*</li>
           </ul>
         </div>
-        <div class="inside-img"><video id="vid-inside" src="https://phillipn1414.github.io/cellnergy-landing/assets/product-detail.mp4" poster="https://phillipn1414.github.io/cellnergy-landing/assets/product-detail.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The CELLNERGY Hydration System and its mineral diffuser"></video></div>
+        <div class="inside-img"><video id="vid-inside" src="{{ 'product-detail.mp4' | asset_url }}" poster="{{ 'product-detail.jpg' | asset_url }}" autoplay muted loop playsinline preload="metadata" aria-label="The CELLNERGY Hydration System and its mineral diffuser"></video></div>
       </div>
     </div>
   </section>
@@ -211,7 +213,7 @@
         </div>
         <div class="ugc-frame reveal d1">
           <span class="ugc-badge">Real customer</span>
-          <video src="https://phillipn1414.github.io/cellnergy-landing/assets/ugc.mp4" poster="https://phillipn1414.github.io/cellnergy-landing/assets/ugc-poster.jpg" controls playsinline muted loop preload="metadata" aria-label="A real customer shares how the water feels"></video>
+          <video src="{{ 'ugc.mp4' | asset_url }}" poster="{{ 'ugc-poster.jpg' | asset_url }}" controls playsinline muted loop preload="metadata" aria-label="A real customer shares how the water feels"></video>
         </div>
       </div>
     </div>
@@ -234,7 +236,7 @@
       </div>
       <div class="offer-grid">
         <div class="offer-visual reveal">
-          <video id="vid-offer" src="https://phillipn1414.github.io/cellnergy-landing/assets/offer-reflux.mp4" poster="https://phillipn1414.github.io/cellnergy-landing/assets/offer-reflux.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The CELLNERGY Hydration System"></video>
+          <video id="vid-offer" src="{{ 'offer-reflux.mp4' | asset_url }}" poster="{{ 'offer-reflux.jpg' | asset_url }}" autoplay muted loop playsinline preload="metadata" aria-label="The CELLNERGY Hydration System"></video>
           <div class="save-badge"><span class="s-small">Save</span><span class="s-big" id="save-amt">$10</span></div>
         </div>
         <div class="order reveal d1">
@@ -271,7 +273,7 @@
               <li>HSA / FSA accepted</li>
             </ul>
           </div>
-          <div class="pay-note"><img class="tm" src="https://phillipn1414.github.io/cellnergy-landing/assets/badges/truemed-orange.svg" alt="Truemed, pay with HSA or FSA" /> Pay with HSA / FSA via Truemed</div>
+          <div class="pay-note"><img class="tm" src="{{ 'truemed-orange.svg' | asset_url }}" alt="Truemed, pay with HSA or FSA" /> Pay with HSA / FSA via Truemed</div>
         </div>
       </div>
     </div>
@@ -436,9 +438,9 @@
     };
     var ITEMS = [
       { svg: "shield", label: "90-Day Money-Back Guarantee" },
-      { chip: true, plain: true, logo: "https://phillipn1414.github.io/cellnergy-landing/assets/badges/truemed-orange.svg", label: "FSA Eligible" },
-      { logo: "https://phillipn1414.github.io/cellnergy-landing/assets/badges/bbb.webp", logoOnly: true, label: "BBB Accredited Business" },
-      { chip: true, logoOnly: true, logo: "https://phillipn1414.github.io/cellnergy-landing/assets/icons/asa-logo.svg", label: "American Society on Aging" },
+      { chip: true, plain: true, logo: "{{ 'truemed-orange.svg' | asset_url }}", label: "FSA Eligible" },
+      { logo: "{{ 'bbb.webp' | asset_url }}", logoOnly: true, label: "BBB Accredited Business" },
+      { chip: true, logoOnly: true, logo: "{{ 'asa-logo.svg' | asset_url }}", label: "American Society on Aging" },
       { svg: "bpa", label: "BPA Free" }
     ];
     var track = document.getElementById("marquee-track");
