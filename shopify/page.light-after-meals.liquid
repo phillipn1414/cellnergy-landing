@@ -216,6 +216,24 @@
           <video src="https://cdn.shopify.com/videos/c/o/v/4b8a45fccb3d41e78931872e97d5d785.mp4" poster="{{ 'ugc-poster.jpg' | asset_url }}" controls playsinline muted loop preload="metadata" aria-label="A real customer shares how the water feels"></video>
         </div>
       </div>
+
+      <!-- Additional UGC videos (Shopify-hosted). Responsive row, stacks on mobile. -->
+      <style>
+        .ugc-row { display: flex; gap: 16px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+        .ugc-row .ugc-frame { flex: 1 1 300px; max-width: 360px; margin: 0; }
+        .ugc-row video { width: 100%; border-radius: 14px; display: block; }
+        @media (max-width: 760px) { .ugc-row .ugc-frame { flex: 1 1 100%; max-width: 100%; } }
+      </style>
+      <div class="ugc-row reveal">
+        <div class="ugc-frame">
+          <span class="ugc-badge">Real customer</span>
+          <video src="https://cdn.shopify.com/videos/c/o/v/807c33d9939a4d7ab3c19d9d17140b3b.mp4" controls playsinline muted loop preload="metadata" aria-label="A real customer shares their experience with the water"></video>
+        </div>
+        <div class="ugc-frame">
+          <span class="ugc-badge">Real customer</span>
+          <video src="https://cdn.shopify.com/videos/c/o/v/95136542130e42a5af1cb2f024bab5ca.mp4" controls playsinline muted loop preload="metadata" aria-label="A real customer shares their experience with the water"></video>
+        </div>
+      </div>
     </div>
   </section>
 
