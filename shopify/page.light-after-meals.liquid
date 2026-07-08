@@ -184,13 +184,13 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="step-badge">5</span>
-        <h2>From our <span class="grad">first customers.</span></h2>
+        <h2>From our <span class="grad">customers.</span></h2>
       </div>
       <div class="reviews-grid">
         <div class="reviews-list">
           <div class="tcard reveal">
             <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
-            <p class="quote">I still eat my big <strong>Sunday dinners</strong> &mdash; I just feel lighter after. <strong>I changed the water, not the food.</strong></p>
+            <p class="quote">I still eat my big <strong>Sunday dinners</strong>, and I just feel lighter after. <strong>I changed the water, not the food.</strong></p>
             <div class="who"><span class="mono">RT</span><div><div class="name">Raymond T.</div></div></div>
           </div>
           <div class="tcard reveal d1">
@@ -205,7 +205,7 @@
           </div>
           <div class="tcard reveal d1">
             <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
-            <p class="quote">I cook the big family dinners, and they used to leave me <strong>heavy.</strong> Now I feel <strong>lighter after</strong> &mdash; and I didn't give up a single dish.</p>
+            <p class="quote">I cook the big family dinners, and they used to leave me <strong>heavy.</strong> Now I feel <strong>lighter after</strong>, and I didn't give up a single dish.</p>
             <div class="who"><span class="mono">SO</span><div><div class="name">Sandra O.</div></div></div>
           </div>
         </div>
@@ -274,6 +274,61 @@
           <div class="pay-note"><img class="tm" src="https://phillipn1414.github.io/cellnergy-landing/assets/badges/truemed-orange.svg" alt="Truemed, pay with HSA or FSA" /> Pay with HSA / FSA via Truemed</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 09b VERIFIED REVIEWS (Stamped.io live widget: read + write reviews) -->
+  <section class="section" id="reviews-all">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>What customers are <span class="grad">saying.</span></h2>
+      </div>
+
+      <!-- Stamped auto-detects #stamped-main-widget and renders the review list +
+           the built-in "Write a review" button. The Stamped script loads on this page
+           via {{ content_for_header }} in lp.liquid. Product data hardcoded because
+           this is a page template (no `product` object). -->
+      <style>
+        #reviews-all .reviews-all-sub { text-align: center; font-size: 15px; color: #7a7a7a; margin: -6px 0 24px; }
+        #stamped-main-widget { max-width: 900px; margin: 0 auto; }
+        .stamped-fallback { text-align: center; margin-top: 18px; }
+        .stamped-fallback a { display: inline-block; padding: 12px 22px; border: 2px solid #F58220;
+          color: #F58220; border-radius: 999px; font-weight: 700; text-decoration: none; }
+        /* Best-effort brand styling of Stamped's own markup (classes may vary by version). */
+        #stamped-main-widget .stamped-fa-star:before,
+        #stamped-main-widget .stamped-fa-star-half:before { color: #F58220 !important; }
+        #stamped-main-widget .stamped-summary-actions-newreview,
+        #stamped-main-widget .stamped-button,
+        #stamped-main-widget button.stamped-button { background: #F58220 !important;
+          border-color: #F58220 !important; color: #fff !important; }
+      </style>
+      <p class="reviews-all-sub">Read real reviews, or leave your own.</p>
+      <div id="stamped-main-widget"
+           data-product-id="10558101160245"
+           data-name="CELLNERGY HYDRATION SYSTEM"
+           data-url="https://shop.lifepharm.com/products/cellnergy-hydration-system"
+           data-image-url="https://phillipn1414.github.io/cellnergy-landing/assets/hero-after-meals.jpg"
+           data-description="CELLNERGY Hydration System"
+           data-product-sku="P101090301"
+           data-product-type=""
+           data-product-title="CELLNERGY HYDRATION SYSTEM">
+      </div>
+      <noscript><div class="stamped-fallback"><a href="https://shop.lifepharm.com/pages/reviews">Read verified reviews &rarr;</a></div></noscript>
+      <div id="stamped-fallback" class="stamped-fallback" hidden>
+        <a href="https://shop.lifepharm.com/products/cellnergy-hydration-system#reviews">Read &amp; write verified reviews &rarr;</a>
+      </div>
+      <script>
+        /* If Stamped hasn't rendered after a few seconds (e.g. its app script isn't on
+           this page), reveal a link to the full reviews page so shoppers always have a path. */
+        (function () {
+          var w = document.getElementById("stamped-main-widget"),
+              fb = document.getElementById("stamped-fallback");
+          if (!w || !fb) return;
+          setTimeout(function () {
+            if (w.children.length === 0 && !window.StampedFn) { fb.hidden = false; }
+          }, 5000);
+        })();
+      </script>
     </div>
   </section>
 
