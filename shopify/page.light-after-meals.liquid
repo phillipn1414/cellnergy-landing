@@ -53,7 +53,29 @@
     .hero-b { display: none; }
     body.lam-variant-b #top { display: none !important; }
     body.lam-variant-b .hero-b { display: flex !important; }
-    @media (max-width: 760px) { body.lam-variant-b .hero-b { display: block !important; } }
+    /* full-bleed photo behind everything */
+    body.lam-variant-b .hero-b .hero-media { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; max-height: none; z-index: 0; }
+    body.lam-variant-b .hero-b .hero-media picture { display: block; width: 100%; height: 100%; }
+    body.lam-variant-b .hero-b .hero-media img.hero-after { width: 100%; height: 100%; object-fit: cover; object-position: 72% 50%; }
+    /* dark scrim: heavy on the left (text), clear on the right (couple + bottle) */
+    body.lam-variant-b .hero-b .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,11,6,.80) 0%, rgba(16,11,6,.52) 34%, rgba(16,11,6,.06) 64%); }
+    body.lam-variant-b .hero-b .wrap { position: relative; z-index: 2; }
+    body.lam-variant-b .hero-b .hero-content h1 { color: #fff; text-shadow: 0 2px 22px rgba(0,0,0,.7); }
+    body.lam-variant-b .hero-b .hero-content .grad { color: #ffb265; }
+    body.lam-variant-b .hero-b .hero-content .sub { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.65); }
+    body.lam-variant-b .hero-b .hero-content .sub strong { color: #fff; }
+    body.lam-variant-b .hero-b .reassure { color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.7); }
+    body.lam-variant-b .hero-b .price-chip { box-shadow: 0 16px 46px rgba(0,0,0,.4); }
+    @media (max-width: 760px) {
+      body.lam-variant-b .hero-b { display: block !important; position: relative; min-height: 82vh; }
+      body.lam-variant-b .hero-b .hero-media { position: absolute; inset: 0; height: 100%; }
+      body.lam-variant-b .hero-b .hero-media img.hero-after { object-position: 58% 38%; }
+      body.lam-variant-b .hero-b .hero-media::after { background: linear-gradient(to bottom, rgba(16,11,6,.22) 0%, rgba(16,11,6,.08) 34%, rgba(16,11,6,.88) 100%); }
+      body.lam-variant-b .hero-b .wrap { position: relative; min-height: 82vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 30px; padding-left: 24px; padding-right: 24px; text-align: center; }
+      body.lam-variant-b .hero-b .hero-content h1 { position: static; transform: none; left: auto; right: auto; top: auto; padding: 0; color: #fff; font-size: clamp(32px, 8.5vw, 42px); }
+      body.lam-variant-b .hero-b .price-chip { margin: 16px auto 0; }
+      body.lam-variant-b .hero-b .hero-cta { justify-content: center; align-items: center; }
+    }
   </style>
   <header class="hero hero-v2 hero-b">
     <div class="hero-media">
@@ -223,50 +245,51 @@
         <span class="step-badge">5</span>
         <h2>From our <span class="grad">customers.</span></h2>
       </div>
-      <div class="reviews-grid">
-        <div class="reviews-list">
-          <div class="tcard reveal">
-            <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
-            <p class="quote">I still eat my big <strong>Sunday dinners</strong>, and I just feel lighter after. <strong>I changed the water, not the food.</strong></p>
-            <div class="who"><span class="mono">RT</span><div><div class="name">Raymond T.</div></div></div>
-          </div>
-          <div class="tcard reveal d1">
-            <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
-            <p class="quote">I used to feel <strong>so heavy after a big dinner.</strong> My evenings feel lighter now. <strong>About three weeks in.</strong></p>
-            <div class="who"><span class="mono">DR</span><div><div class="name">Denise R.</div></div></div>
-          </div>
-          <div class="tcard reveal">
-            <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
-            <p class="quote">I was never a water-bottle person. The only thing I changed was my water, and a few weeks in, <strong>I just feel lighter for it.</strong></p>
-            <div class="who"><span class="mono">CM</span><div><div class="name">Chris M.</div></div></div>
-          </div>
-          <div class="tcard reveal d1">
-            <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
-            <p class="quote">I cook the big family dinners, and they used to leave me <strong>heavy.</strong> Now I feel <strong>lighter after</strong>, and I didn't give up a single dish.</p>
-            <div class="who"><span class="mono">SO</span><div><div class="name">Sandra O.</div></div></div>
-          </div>
+      <div class="reviews-list">
+        <div class="tcard reveal">
+          <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
+          <p class="quote">I still eat my big <strong>Sunday dinners</strong>, and I just feel lighter after. <strong>I changed the water, not the food.</strong></p>
+          <div class="who"><span class="mono">RT</span><div><div class="name">Raymond T.</div></div></div>
         </div>
-        <div class="ugc-frame reveal d1">
-          <span class="ugc-badge">Real customer</span>
-          <video src="https://cdn.shopify.com/videos/c/o/v/4b8a45fccb3d41e78931872e97d5d785.mp4" poster="{{ 'ugc-poster.jpg' | asset_url }}" controls playsinline muted loop preload="metadata" aria-label="A real customer shares how the water feels"></video>
+        <div class="tcard reveal d1">
+          <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
+          <p class="quote">I used to feel <strong>so heavy after a big dinner.</strong> My evenings feel lighter now. <strong>About three weeks in.</strong></p>
+          <div class="who"><span class="mono">DR</span><div><div class="name">Denise R.</div></div></div>
+        </div>
+        <div class="tcard reveal">
+          <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
+          <p class="quote">I was never a water-bottle person. The only thing I changed was my water, and a few weeks in, <strong>I just feel lighter for it.</strong></p>
+          <div class="who"><span class="mono">CM</span><div><div class="name">Chris M.</div></div></div>
+        </div>
+        <div class="tcard reveal d1">
+          <span class="stars">&starf;&starf;&starf;&starf;&starf;</span>
+          <p class="quote">I cook the big family dinners, and they used to leave me <strong>heavy.</strong> Now I feel <strong>lighter after</strong>, and I didn't give up a single dish.</p>
+          <div class="who"><span class="mono">SO</span><div><div class="name">Sandra O.</div></div></div>
         </div>
       </div>
 
-      <!-- Additional UGC videos (Shopify-hosted). Responsive row, stacks on mobile. -->
+      <!-- All three UGC videos in one compact row. Shopify-hosted; the two without a poster
+           use a #t= media fragment so a real frame shows as the thumbnail (not a black box). -->
       <style>
-        .ugc-row { display: flex; gap: 16px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-        .ugc-row .ugc-frame { flex: 1 1 300px; max-width: 360px; margin: 0; }
-        .ugc-row video { width: 100%; border-radius: 14px; display: block; }
-        @media (max-width: 760px) { .ugc-row .ugc-frame { flex: 1 1 100%; max-width: 100%; } }
+        .ugc-3row { display: flex; gap: 16px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
+        .ugc-3row .ugc-frame { flex: 0 1 240px; max-width: 240px; aspect-ratio: 9 / 16; align-self: auto; }
+        @media (max-width: 760px) {
+          .ugc-3row { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+          .ugc-3row .ugc-frame { flex: 0 0 62%; max-width: 62%; }
+        }
       </style>
-      <div class="ugc-row reveal">
+      <div class="ugc-3row reveal">
         <div class="ugc-frame">
           <span class="ugc-badge">Real customer</span>
-          <video src="https://cdn.shopify.com/videos/c/o/v/807c33d9939a4d7ab3c19d9d17140b3b.mp4" controls playsinline muted loop preload="metadata" aria-label="A real customer shares their experience with the water"></video>
+          <video src="https://cdn.shopify.com/videos/c/o/v/4b8a45fccb3d41e78931872e97d5d785.mp4" poster="{{ 'ugc-poster.jpg' | asset_url }}" controls playsinline muted loop preload="metadata" aria-label="A real customer shares how the water feels"></video>
         </div>
         <div class="ugc-frame">
           <span class="ugc-badge">Real customer</span>
-          <video src="https://cdn.shopify.com/videos/c/o/v/95136542130e42a5af1cb2f024bab5ca.mp4" controls playsinline muted loop preload="metadata" aria-label="A real customer shares their experience with the water"></video>
+          <video src="https://cdn.shopify.com/videos/c/o/v/807c33d9939a4d7ab3c19d9d17140b3b.mp4#t=0.5" controls playsinline muted loop preload="metadata" aria-label="A real customer shares their experience with the water"></video>
+        </div>
+        <div class="ugc-frame">
+          <span class="ugc-badge">Real customer</span>
+          <video src="https://cdn.shopify.com/videos/c/o/v/95136542130e42a5af1cb2f024bab5ca.mp4#t=0.5" controls playsinline muted loop preload="metadata" aria-label="A real customer shares their experience with the water"></video>
         </div>
       </div>
     </div>
