@@ -44,41 +44,36 @@
     </div>
   </header>
 
-  <!-- 02b HERO VARIANT B (product-forward) — HIDDEN by default. Intelligems' experiment
-       shows this and hides .hero-v2 to A/B test product vs lifestyle hero. Same headline /
-       price / CTA as variant A so the image is the only variable. Uses the existing Shopify
-       product photo (no new asset). -->
+  <!-- 02b HERO VARIANT B (product-in-scene) — HIDDEN by default. Reuses the .hero-v2 layout
+       so it behaves identically to variant A (desktop split, mobile overlay band); only the
+       image differs. Responsive <picture>: 16:9 on desktop, 4:5 on mobile. To A/B test:
+       Intelligems' variant runs one line of JS to add body.lam-variant-b, which reveals this
+       hero and hides variant A (display values are pre-set per breakpoint below). -->
   <style>
-    .hero-alt { display: none; }
-    .hero-alt .hero-alt-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 36px; align-items: center; padding: 48px 0; }
-    .hero-alt .hero-alt-media { display: flex; justify-content: center; }
-    .hero-alt .hero-alt-media img { width: 100%; max-width: 340px; height: auto; display: block; filter: drop-shadow(0 22px 45px rgba(0,0,0,.14)); }
-    @media (max-width: 760px) {
-      .hero-alt .hero-alt-grid { grid-template-columns: 1fr; gap: 14px; padding: 22px 0 8px; text-align: center; }
-      .hero-alt .hero-alt-media { order: -1; }
-      .hero-alt .hero-alt-media img { max-width: 210px; }
-      .hero-alt .price-chip { margin-left: auto; margin-right: auto; }
-      .hero-alt .hero-cta { justify-content: center; }
-    }
+    .hero-b { display: none; }
+    body.lam-variant-b #top { display: none !important; }
+    body.lam-variant-b .hero-b { display: flex !important; }
+    @media (max-width: 760px) { body.lam-variant-b .hero-b { display: block !important; } }
   </style>
-  <header class="hero hero-alt">
+  <header class="hero hero-v2 hero-b">
+    <div class="hero-media">
+      <picture>
+        <source media="(max-width: 760px)" srcset="https://cdn.shopify.com/s/files/1/0885/0128/9269/files/hero-after-meals-product-4x5.png?v=1783555379">
+        <img src="https://cdn.shopify.com/s/files/1/0885/0128/9269/files/hero-after-meals-product-16x9.png?v=1783555379" class="hero-after" alt="An older couple relaxing together after a home-cooked family dinner, with the CELLNERGY Hydration System bottle on the table" />
+      </picture>
+    </div>
     <div class="wrap">
-      <div class="hero-alt-grid">
-        <div class="hero-content">
-          <h1>Love the meal. <span class="grad">Skip the heavy hour.</span></h1>
-          <p class="sub">It's not the food. <strong>It's your water.</strong></p>
-          <div class="price-chip">
-            <span class="was">$49</span>
-            <span class="now">$39</span>
-            <span class="save">Launch price &middot; save $10</span>
-          </div>
-          <div class="hero-cta">
-            <a class="btn" href="https://shop.lifepharm.com/discount/MEAL10?redirect=/cart/53040002400565:1">Get Mine For $39 &rarr;</a>
-            <span class="reassure"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>90-Day Money-Back Guarantee</span>
-          </div>
+      <div class="hero-content">
+        <h1>Love the meal. <span class="grad">Skip the heavy hour.</span></h1>
+        <p class="sub">It's not the food. <strong>It's your water.</strong></p>
+        <div class="price-chip">
+          <span class="was">$49</span>
+          <span class="now">$39</span>
+          <span class="save">Launch price &middot; save $10</span>
         </div>
-        <div class="hero-alt-media">
-          <img src="https://shop.lifepharm.com/cdn/shop/files/cellnergy-bottle_large.png?v=1782146397" alt="The CELLNERGY Hydration System bottle with its built-in mineral diffuser" />
+        <div class="hero-cta">
+          <a class="btn" href="https://shop.lifepharm.com/discount/MEAL10?redirect=/cart/53040002400565:1">Get Mine For $39 &rarr;</a>
+          <span class="reassure"><svg class="guar-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>90-Day Money-Back Guarantee</span>
         </div>
       </div>
     </div>
